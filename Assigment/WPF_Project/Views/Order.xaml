@@ -1,0 +1,75 @@
+﻿<Page x:Class="WPF_Project.Views.Order"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Views"
+      mc:Ignorable="d" 
+      d:DesignHeight="550" d:DesignWidth="900"
+      Title="Order"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      >
+
+    <Canvas>
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding Products}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Discount}" />
+                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" />
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding AddToCart,
+                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
+                                CommandParameter="{Binding Id}" >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="PlusThick" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid
+            CanUserAddRows="False"
+            ItemsSource="{Binding Products}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            HorizontalAlignment="Left" 
+            Canvas.Left="528" 
+            VerticalAlignment="Center"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DeleteCommand}"
+                                CommandParameter="{Binding Id}" >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="CloseThick" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Canvas>
+</Page>
