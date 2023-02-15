@@ -67,7 +67,7 @@ namespace WPF_Project.ViewModels
 
         private void ExecuteAddProductToListOrder(string id)
         {
-            MessageBox.Show("adwa " + id);
+            products = new List<Product>();
         }
 
         private bool CanExecuteAddProductToListOrder(string id)

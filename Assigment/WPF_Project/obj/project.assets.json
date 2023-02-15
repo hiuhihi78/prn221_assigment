@@ -3618,11 +3618,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\FU\\PRN221\\Assigment\\Assigment\\WPF_Project\\WPF_Project.csproj",
+      "projectUniqueName": "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\WPF_Project\\WPF_Project.csproj",
       "projectName": "WPF_Project",
-      "projectPath": "D:\\FU\\PRN221\\Assigment\\Assigment\\WPF_Project\\WPF_Project.csproj",
+      "projectPath": "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\WPF_Project\\WPF_Project.csproj",
       "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-      "outputPath": "D:\\FU\\PRN221\\Assigment\\Assigment\\WPF_Project\\obj\\",
+      "outputPath": "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\WPF_Project\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

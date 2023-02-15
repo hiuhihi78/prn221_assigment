@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\FU\\PRN221\\Assigment\\Assigment\\Assigment\\Assigment.csproj": {}
+    "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\Assigment\\Assigment.csproj": {}
   },
   "projects": {
-    "D:\\FU\\PRN221\\Assigment\\Assigment\\Assigment\\Assigment.csproj": {
+    "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\Assigment\\Assigment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\FU\\PRN221\\Assigment\\Assigment\\Assigment\\Assigment.csproj",
+        "projectUniqueName": "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\Assigment\\Assigment.csproj",
         "projectName": "Assigment",
-        "projectPath": "D:\\FU\\PRN221\\Assigment\\Assigment\\Assigment\\Assigment.csproj",
+        "projectPath": "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\Assigment\\Assigment.csproj",
         "packagesPath": "C:\\Users\\dell\\.nuget\\packages\\",
-        "outputPath": "D:\\FU\\PRN221\\Assigment\\Assigment\\Assigment\\obj\\",
+        "outputPath": "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\Assigment\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

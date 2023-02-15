@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "0nNkfgPtUSbNvhzx2sAd+ic62LGDl5+znl4Pd4ZZa0+oXNz4nnKOH7snupscCmjD2GP/ta1vFzrPl9E3i9mv7A==",
+  "dgSpecHash": "oaGKPfX/u9cYQc886/K8R+J7Y6SpfXownY9UCktB+K/oFsqX0INVaolRAgJZiFNIhqueXIpx1AvCNzQa/u9Hxg==",
   "success": true,
-  "projectFilePath": "D:\\FU\\PRN221\\Assigment\\Assigment\\WPF_Project\\WPF_Project.csproj",
+  "projectFilePath": "D:\\FU\\PRN221\\Assigment\\prn221_assigment\\Assigment\\WPF_Project\\WPF_Project.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\dell\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\dell\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
