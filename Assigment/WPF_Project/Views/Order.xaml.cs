@@ -26,5 +26,6 @@ namespace WPF_Project.Views
             InitializeComponent();
             DataContext = new OrderViewModel();
         }
+
     }
 }

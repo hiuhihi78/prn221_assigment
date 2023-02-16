@@ -8,6 +8,8 @@
       d:DesignHeight="550" d:DesignWidth="900"
       Title="Order"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      
+
       >
 
     <Canvas>
@@ -15,6 +17,7 @@
             Name="gridProducts"
             CanUserAddRows="False"
             ItemsSource="{Binding Products}"
+            SelectedItem="{Binding SelectedProduct}"
             SelectionMode="Extended"
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
@@ -30,9 +33,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
-                                Command="{Binding AddToCart,
-                                RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                CommandParameter="{Binding Id}" >
+                                Command="{Binding DataContext.AddToCart, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                >
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="PlusThick" />
                                 </Button.Content>
@@ -44,7 +47,8 @@
         </DataGrid>
         <DataGrid
             CanUserAddRows="False"
-            ItemsSource="{Binding Products}"
+            ItemsSource="{Binding ListOrderProduct}"
+            SelectedItem="{Binding SelectedRemoveProduct}"
             SelectionMode="Extended"
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
@@ -55,13 +59,19 @@
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
+                <DataGridTemplateColumn Header="Quantity">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTemplateColumn Header="Actions">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
-                                Command="{Binding DeleteCommand}"
-                                CommandParameter="{Binding Id}" >
+                                Command="{Binding DataContext.RemoveProductInCart , RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}" >
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="CloseThick" />
                                 </Button.Content>

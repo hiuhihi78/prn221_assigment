@@ -22,31 +22,51 @@ namespace WPF_Project.ViewModels
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private List<Product> products;
+        #region Declare
+
+        private ObservableCollection<Product> products;
 
         private ProductService productService;
 
-        public List<Product> Products
+        public ObservableCollection<Product> Products
         {
             get { return products; }
-            set { products = value; }
+            set { products = value; OnPropertyChanged(); }
         }
 
-        private List<Product> listOrderProduct;
+        private ObservableCollection<Product> listOrderProduct;
 
-        public List<Product> ListOrderProduct
+        public ObservableCollection<Product> ListOrderProduct
         {
             get { return listOrderProduct; }
-            set {  listOrderProduct= value; }
+            set {  listOrderProduct= value; OnPropertyChanged(); }
         }
 
+        private Product selectedProduct;
+        public Product SelectedProduct
+        {
+            get { return selectedProduct; }
+            set { selectedProduct = value; OnPropertyChanged(); }
+        }
+
+        private Product selectedRemoveProduct;
+        public Product SelectedRemoveProduct
+        {
+            get { return selectedRemoveProduct; }
+            set { selectedRemoveProduct = value; OnPropertyChanged(); }
+        }
+
+        #endregion
 
         public OrderViewModel() 
         {
             productService = new ProductService();
-            products = new List<Product>();
-            listOrderProduct = new List<Product>();
-            addToCart = new RelayCommand<string>(ExecuteAddProductToListOrder, CanExecuteAddProductToListOrder);
+            products = new ObservableCollection<Product>();
+            listOrderProduct = new ObservableCollection<Product>();
+            addToCart = new RelayCommand<Product>(ExecuteAddProductToListOrder, CanExecuteAddProductToListOrder);
+            selectedProduct = new Product();
+            selectedRemoveProduct= new Product();
+            removeProductInCart = new RelayCommand<Product>(ExecuteDeleteProductInCart, CanExecuteDeleteProductInCart);
             LoadProducts();
         }
 
@@ -57,24 +77,72 @@ namespace WPF_Project.ViewModels
         }
         #endregion
 
-        private RelayCommand<string> addToCart;
 
-        public RelayCommand<string> AddToCart
+        #region
+        private RelayCommand<Product> addToCart;
+
+        public RelayCommand<Product> AddToCart
         {
             get { return addToCart; }
             set { addToCart = value; OnPropertyChanged(); }
         }
 
-        private void ExecuteAddProductToListOrder(string id)
+        private void ExecuteAddProductToListOrder(Product productSelected)
         {
-            products = new List<Product>();
+            bool productExsited = listOrderProduct.FirstOrDefault(x => x.Id == productSelected.Id) != null;
+            if (productExsited) 
+            {
+                Product product = listOrderProduct.FirstOrDefault(x =>x.Id == productSelected.Id);
+                product.Quantity = product.Quantity + 1;
+            }
+            else
+            {
+                Product product = productService.GetProductById(productSelected.Id);
+                if(product == null)
+                {
+
+                }else if(product.Quantity == 0) 
+                {
+
+                }
+                else
+                {
+                    product.Quantity = 1;
+                    listOrderProduct.Add(product);
+                }
+            }
         }
 
-        private bool CanExecuteAddProductToListOrder(string id)
+        private bool CanExecuteAddProductToListOrder(Product product)
         {
             // Return true or false to enable/disable the command
             return true;
         }
+        #endregion
+
+
+        #region Remove a Product In Cart
+
+        private RelayCommand<Product> removeProductInCart;
+
+        public RelayCommand<Product> RemoveProductInCart
+        {
+            get { return removeProductInCart; }
+            set { removeProductInCart = value; }
+        }
+
+        private void ExecuteDeleteProductInCart(Product selectedRemoveProduct)
+        {
+            listOrderProduct.Remove(selectedRemoveProduct);
+        }
+
+        private bool CanExecuteDeleteProductInCart(Product selectedRemoveProduct)
+        {
+            bool productExisted = listOrderProduct.FirstOrDefault(x => x.Id == selectedRemoveProduct.Id) != null;
+            return productExisted;
+        }
+
+        #endregion
 
     }
 }
