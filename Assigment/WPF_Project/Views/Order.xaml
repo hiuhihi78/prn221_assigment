@@ -5,14 +5,56 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_Project.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="550" d:DesignWidth="900"
+      d:DesignHeight="650" d:DesignWidth="1100"
       Title="Order"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       
-
+      FontSize="15"
       >
 
-    <Canvas>
+    <Canvas Margin="7,-11,-7,11">
+        <TextBlock
+            Text="ORDER"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Left" Canvas.Left="17" VerticalAlignment="Top" Canvas.Top="27"
+            />
+        <Label 
+            Name="lbProductName" 
+            Content="Product" 
+            Canvas.Left="60"
+            Canvas.Top="124" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBox
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="157" Canvas.Top="100" HorizontalAlignment="Center" VerticalAlignment="Top" Width="293" RenderTransformOrigin="0.501,0.559"
+            Text="{Binding SearchProductName}"
+            />
+        <Label
+            Name="lbCategory"
+            Content="Category" Canvas.Left="60" Canvas.Top="181" HorizontalAlignment="Center" VerticalAlignment="Top"
+            />
+        <ComboBox
+            x:Name="FilledComboBox"
+            Width="293"
+            IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+            Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="157" Canvas.Top="162" HorizontalAlignment="Center" VerticalAlignment="Top"
+            
+            ItemsSource="{Binding Categorys}" 
+            DisplayMemberPath="Name" 
+            SelectedValuePath="Id" 
+            SelectedValue="{Binding SelectedCategory}"
+            />
+
+        <Button
+            Content="Search"
+            Command="{Binding SearchProduct}"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" 
+            Canvas.Left="477" Canvas.Top="165" HorizontalAlignment="Left" 
+            VerticalAlignment="Top" Width="105" Height="45" 
+            />
+
         <DataGrid
             Name="gridProducts"
             CanUserAddRows="False"
@@ -22,14 +64,16 @@
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
             IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="301" Canvas.Left="17" Canvas.Top="246" HorizontalAlignment="Left" VerticalAlignment="Center" Width="678"
             >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Discount}" />
-                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" />
-                <DataGridTemplateColumn Header="Actions">
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="120" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
+                <DataGridTemplateColumn Header="Actions" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
@@ -47,22 +91,24 @@
         </DataGrid>
         <DataGrid
             CanUserAddRows="False"
-            ItemsSource="{Binding ListOrderProduct}"
+            ItemsSource="{Binding ListOrderProduct, Mode=TwoWay}"
             SelectedItem="{Binding SelectedRemoveProduct}"
             SelectionMode="Extended"
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
             IsReadOnly="True"
-            HorizontalAlignment="Left" 
-            Canvas.Left="528" 
-            VerticalAlignment="Center"
+            HorizontalAlignment="Center" 
+            Canvas.Left="745" 
+            VerticalAlignment="Top"
+            ScrollViewer.CanContentScroll="True" 
+            Height="244" Canvas.Top="249"
             >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150" />
                 <DataGridTemplateColumn Header="Quantity">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            
+                            <TextBlock Text="{Binding Quantity}" Width="80"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
@@ -71,7 +117,8 @@
                         <DataTemplate>
                             <Button
                                 Command="{Binding DataContext.RemoveProductInCart , RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                CommandParameter="{Binding}" >
+                                CommandParameter="{Binding}" 
+                                >
                                 <Button.Content>
                                     <materialDesign:PackIcon Kind="CloseThick" />
                                 </Button.Content>
@@ -81,5 +128,37 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Label Content="Total:" 
+               FontSize="24"
+               Canvas.Left="745" Canvas.Top="503"
+               HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock
+            Text="{Binding TotalPriceOrder}"
+            Width="200" Canvas.Left="831" Canvas.Top="507"
+            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
+            />
+        <Button
+            Command="{Binding DataContext.AddToCart, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+            CommandParameter="{Binding}" 
+            Canvas.Left="900" Canvas.Top="560" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Width="133" Height="67"
+            Background="#49be25"
+            FontSize="40"
+            IsEnabled="{Binding EnableButtonCheckout}"
+            > 
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="CartArrowRight" />
+            </Button.Content>
+        </Button>
+
+        <Rectangle Height="365" Canvas.Left="725"
+                   Stroke="Black" Canvas.Top="188" 
+                   Width="350" HorizontalAlignment="Center"
+                   VerticalAlignment="Top"/>
     </Canvas>
 </Page>

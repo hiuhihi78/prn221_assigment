@@ -13,16 +13,37 @@ namespace WPF_Project.Models
         private ShopTestContext context = new ShopTestContext();
         public ProductService() { }
 
-        public ObservableCollection<Product> GetAllProduct()
+        public ObservableCollection<ProductDTO> GetAllProduct()
         {
-            var products = context.Products.Include(x => x.Category);   
-            return new ObservableCollection<Product>(products);
+            var products = context.Products.Include(x => x.Category).ToList();
+            var result = new ObservableCollection<ProductDTO>();
+            foreach (var item in products)
+            {
+                ProductDTO productDTO = ProductDTO.FromProduct(item);
+                result.Add(productDTO);
+            }
+            return result;
         }
 
-        public Product GetProductById(int id) 
+        public ProductDTO GetProductById(int id)
         {
-            var product = context.Products.FirstOrDefault(x => x.Id == id);
-            return product;
+            Product product = context.Products.Where(x => x.Id == id).FirstOrDefault();
+            if (product == null) return null;
+            return ProductDTO.FromProduct(product);
+        }
+
+        public ObservableCollection<ProductDTO> GetListProductByNameAndCategory(string productName, int categoryId)
+        {
+            var products = context.Products.Where(x => x.Name.Contains(productName) && x.Id == categoryId).ToList();
+            if(products == null) return new ObservableCollection<ProductDTO> { };
+            return ProductDTO.FromListProductToObservableProductDTO(products);
+        }
+
+        public ObservableCollection<ProductDTO> GetListProductByName(string productName)
+        {
+            var products = context.Products.Where(x => x.Name.Contains(productName)).ToList();
+            if (products == null) return new ObservableCollection<ProductDTO> { };
+            return ProductDTO.FromListProductToObservableProductDTO(products);
         }
     }
 }

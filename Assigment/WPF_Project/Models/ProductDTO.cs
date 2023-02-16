@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace WPF_Project.Models
 {
-    public class ProductDTO
+    public class ProductDTO : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -72,14 +73,44 @@ namespace WPF_Project.Models
             set { categoryId = value; NotifyPropertyChanged(); }
         }
 
-        private Category categoryName;
-        public Category CategoryName
+        private Category category;
+
+        public Category Category
         {
-            get { return categoryName; }
-            set { categoryName = value; NotifyPropertyChanged(); }
+            get { return category; }
+            set { category = value; NotifyPropertyChanged();}
         }
 
-        
+        public virtual ICollection<ImportDetail> ImportDetails { get; } = new List<ImportDetail>();
+
+        public virtual ICollection<OrderDetail> OrderDetails { get; } = new List<OrderDetail>();
+
+        public static ProductDTO FromProduct(Product product)
+        {
+            return new ProductDTO
+            {
+                Name = product.Name,
+                Id = product.Id,
+                Description = product.Description,
+                Quantity = product.Quantity,
+                Price = product.Price,
+                Discount = product.Discount,
+                Country = product.Country,
+                CategoryId = product.CategoryId,
+                Category = product.Category,
+            };
+        }
+
+        public static ObservableCollection<ProductDTO> FromListProductToObservableProductDTO(List<Product> products)
+        {
+            var result = new ObservableCollection<ProductDTO>();
+            foreach (var item in products)
+            {
+                ProductDTO productDTO = FromProduct(item);
+                result.Add(productDTO);
+            }
+            return result;
+        }
 
     }
 }
