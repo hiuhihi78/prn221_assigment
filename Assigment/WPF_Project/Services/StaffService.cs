@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_Project.DTOs;
+using WPF_Project.Models;
 
-namespace WPF_Project.Models
+namespace WPF_Project.Services
 {
     public class StaffService
     {
@@ -17,17 +19,17 @@ namespace WPF_Project.Models
 
         public Staff GetUser(StaffDTO staff)
         {
-            Staff user = context.Staff.Where(x => x.Username== staff.Username && x.Password == staff.Password).FirstOrDefault();
+            Staff user = context.Staff.Where(x => x.Username == staff.Username && x.Password == staff.Password).FirstOrDefault();
             return user;
         }
 
-        public Staff GetUserInfoByUserName(string userName) 
+        public Staff GetUserInfoByUserName(string userName)
         {
             Staff user = context.Staff.Where(x => x.Username == userName).FirstOrDefault();
             return user;
         }
 
-        public bool AddStaff(StaffDTO staffDTO) 
+        public bool AddStaff(StaffDTO staffDTO)
         {
             try
             {
@@ -44,7 +46,8 @@ namespace WPF_Project.Models
                 context.Staff.Add(user);
                 context.SaveChanges();
                 return true;
-            }catch(Exception ex) 
+            }
+            catch (Exception ex)
             {
                 return false;
             }

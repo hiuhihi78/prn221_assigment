@@ -9,7 +9,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using WPF_Project.Command;
-using WPF_Project.Models;
+using WPF_Project.DTOs;
+using WPF_Project.Services;
 
 namespace WPF_Project.ViewModels
 {

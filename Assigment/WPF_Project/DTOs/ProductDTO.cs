@@ -5,8 +5,9 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_Project.Models;
 
-namespace WPF_Project.Models
+namespace WPF_Project.DTOs
 {
     public class ProductDTO : INotifyPropertyChanged
     {
@@ -78,7 +79,7 @@ namespace WPF_Project.Models
         public Category Category
         {
             get { return category; }
-            set { category = value; NotifyPropertyChanged();}
+            set { category = value; NotifyPropertyChanged(); }
         }
 
         public virtual ICollection<ImportDetail> ImportDetails { get; } = new List<ImportDetail>();

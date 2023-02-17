@@ -5,8 +5,9 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_Project.Models;
 
-namespace WPF_Project.Models
+namespace WPF_Project.DTOs
 {
     public class StaffDTO : INotifyPropertyChanged
     {

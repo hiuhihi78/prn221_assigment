@@ -70,7 +70,7 @@
                     </TabItem.InputBindings>
                 </TabItem>
             </TabControl>
-            <Frame Name="OrderFrame" Grid.Column="1" Source="Order.xaml"/>
+            <Frame Name="MainFrame" Grid.Column="1" Source="Order.xaml"/>
         </Grid>
     </materialDesign:Card>
 

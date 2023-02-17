@@ -9,8 +9,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using WPF_Project.Command;
-using WPF_Project.Models;
+using WPF_Project.DTOs;
 using WPF_Project.Navigation;
+using WPF_Project.Services;
 using WPF_Project.Views;
 
 namespace WPF_Project.ViewModels
