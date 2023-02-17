@@ -69,7 +69,7 @@
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
-                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="120" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" />
                 <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
                 <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
@@ -97,14 +97,14 @@
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
             IsReadOnly="True"
-            HorizontalAlignment="Center" 
-            Canvas.Left="745" 
-            VerticalAlignment="Top"
+            HorizontalAlignment="Left" 
+            Canvas.Left="710" 
+            VerticalAlignment="Center"
             ScrollViewer.CanContentScroll="True" 
-            Height="244" Canvas.Top="249"
+            Height="244" Canvas.Top="259" Width="370"
             >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="150" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="160" />
                 <DataGridTemplateColumn Header="Quantity">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -139,15 +139,14 @@
             FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
             />
         <Button
-            Command="{Binding DataContext.AddToCart, RelativeSource={RelativeSource AncestorType=DataGrid}}"
-            CommandParameter="{Binding}" 
+            Command="{Binding CheckoutOrder}"
+            IsEnabled="{Binding EnableButtonCheckout}"
             Canvas.Left="900" Canvas.Top="560" 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Width="133" Height="67"
             Background="#49be25"
             FontSize="40"
-            IsEnabled="{Binding EnableButtonCheckout}"
-            > 
+            >
             <Button.Content>
                 <materialDesign:PackIcon 
                     Width="40"
@@ -156,9 +155,9 @@
             </Button.Content>
         </Button>
 
-        <Rectangle Height="365" Canvas.Left="725"
+        <Rectangle Height="364" Canvas.Left="702"
                    Stroke="Black" Canvas.Top="188" 
-                   Width="350" HorizontalAlignment="Center"
+                   Width="375" HorizontalAlignment="Center"
                    VerticalAlignment="Top"/>
     </Canvas>
 </Page>

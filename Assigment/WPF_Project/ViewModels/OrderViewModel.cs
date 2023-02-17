@@ -124,6 +124,7 @@ namespace WPF_Project.ViewModels
             searchProduct = new RelayCommand(ExecuteSearchProduct);
             totalPriceOrder = 0;
             enableButtonCheckout = false;
+            checkoutOrder = new RelayCommand(ExecuteCheckoutOrder);
             LoadAllCategorys();
             LoadAllProducts();
         }
@@ -272,13 +273,19 @@ namespace WPF_Project.ViewModels
         }
         #endregion
 
-        #region Checkout Order (Navigation to screen checkout product)
-        private RelayCommand checkout;
+        #region Checkout Order (Navigation to screen checkout order)
 
-        public RelayCommand Checkout
+        private RelayCommand checkoutOrder;
+
+        public RelayCommand CheckoutOrder
         {
-            get { return checkout; }
-            set { checkout = value; }
+            get { return checkoutOrder; }
+            set { checkoutOrder = value; OnPropertyChanged(); }
+        }
+
+        private void ExecuteCheckoutOrder()
+        {
+            MessageBox.Show("dawd");
         }
 
         #endregion
