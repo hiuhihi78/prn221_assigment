@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPF_Project.Navigation;
+using WPF_Project.ViewModels;
+using WPF_Project.Views;
 
 namespace WPF_Project.Views
 {
@@ -23,6 +25,8 @@ namespace WPF_Project.Views
         public Home()
         {
             InitializeComponent();
+            DataContext = new HomeViewModel();
+            NavigationFrameContentHomeScreen.Initialize(MainFrame);
         }
     }
 }

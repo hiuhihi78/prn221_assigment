@@ -10,82 +10,68 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
             >
     <materialDesign:Card>
-        <TabControl
-            materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
-            SnapsToDevicePixels="True"
-            Style="{StaticResource MaterialDesignNavigationRailTabControl}"
-            TabStripPlacement="Left">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TabControl
+                materialDesign:NavigationRailAssist.ShowSelectionBackground="True"
+                SnapsToDevicePixels="True"
+                Style="{StaticResource MaterialDesignNavigationRailTabControl}"
+                TabStripPlacement="Left"
+                Grid.Column="0"
+                >
 
-            <materialDesign:NavigationRailAssist.FloatingContent>
-                <Image Source="D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\Images\Logo.png"
+                <materialDesign:NavigationRailAssist.FloatingContent>
+                    <Image Source="D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\Images\Logo.png"
                        Width="70"
                        Height="70"
                     />
-            </materialDesign:NavigationRailAssist.FloatingContent>
+                </materialDesign:NavigationRailAssist.FloatingContent>
 
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel
                         Width="auto"
                         Height="auto">
-                        <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
-                            HorizontalAlignment="Center"
-                            Kind="ArrowUpBoldCircleOutline" />
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            Text="Orders" /> 
-                    </StackPanel>
-                </TabItem.Header>
-                <Canvas Margin="10">
-                    <Frame x:Name="OrderFrame" Source="Order.xaml"/>
-                </Canvas>
-            </TabItem>
-            
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel
-                        Width="auto"
-                        Height="auto">
-                        <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
-                            HorizontalAlignment="Center"
-                            Kind="ArrowDownBoldCircleOutline" />
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            Text="Import" />    
-                    </StackPanel>
-                </TabItem.Header>
-                <StackPanel Margin="16">
-                    
-                </StackPanel>
-            </TabItem>
-            
-            <TabItem>
-                <TabItem.Header>
-                    <StackPanel
-                        Width="auto"
-                        Height="auto">
-                        <materialDesign:PackIcon
-                            Width="24"
-                            Height="24"
-                            HorizontalAlignment="Center"
-                            Kind="Images" />
-                        <TextBlock
-                            HorizontalAlignment="Center"
-                            Text="Photos" />
-                    </StackPanel>
-                </TabItem.Header>
-                <StackPanel
-                    Margin="16">
-          
-                </StackPanel>
-            </TabItem>
-            
-            
-        </TabControl>
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="ArrowUpBoldCircleOutline" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="Orders" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickOrderCommand}"/>
+                    </TabItem.InputBindings>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel
+                            Width="auto"
+                            Height="auto">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="ArrowDownBoldCircleOutline" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="Import" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickImportCommand}"/>
+                    </TabItem.InputBindings>
+                </TabItem>
+            </TabControl>
+            <Frame Name="OrderFrame" Grid.Column="1" Source="Order.xaml"/>
+        </Grid>
     </materialDesign:Card>
 
 
