@@ -27,6 +27,7 @@ namespace WPF_Project.Navigation
             _frame.Navigate(page);
         }
 
+
         public static void GoBack()
         {
             _frame.GoBack();

@@ -11,19 +11,22 @@ using System.Windows.Controls;
 using WPF_Project.Command;
 using WPF_Project.DTOs;
 using WPF_Project.Services;
+using WPF_Project.Navigation;
+using WPF_Project.Views;
 
 namespace WPF_Project.ViewModels
 {
     public class OrderViewModel : INotifyPropertyChanged
     {
+
+        #region Declare variables
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
         private void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        #region Declare
 
         private ProductService productService;
 
@@ -110,6 +113,8 @@ namespace WPF_Project.ViewModels
 
         #endregion
 
+        #region Contructor
+
         public OrderViewModel()
         {
             productService = new ProductService();
@@ -129,6 +134,7 @@ namespace WPF_Project.ViewModels
             LoadAllCategorys();
             LoadAllProducts();
         }
+        #endregion
 
         #region Load all list product
         public void LoadAllProducts()
@@ -144,7 +150,6 @@ namespace WPF_Project.ViewModels
             Categorys.Add(new CategoryDTO { Id = 0, Name = "All Category" });
         }
         #endregion
-
 
         #region Add to cart
 
@@ -286,7 +291,8 @@ namespace WPF_Project.ViewModels
 
         private void ExecuteCheckoutOrder()
         {
-            MessageBox.Show("dawd");
+            NavigationParameters.Parameters.Add("listOrder", ListOrderProduct);
+            NavigationFrameContentHomeScreen.NavigateTo(new CheckoutOrder());
         }
 
         #endregion

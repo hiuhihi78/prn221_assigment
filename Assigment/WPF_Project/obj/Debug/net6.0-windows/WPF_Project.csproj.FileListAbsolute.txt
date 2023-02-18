@@ -165,3 +165,5 @@ D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-w
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-windows\ru\Xceed.Wpf.AvalonDock.NET5.resources.dll
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-windows\sv\Xceed.Wpf.AvalonDock.NET5.resources.dll
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-windows\zh-Hans\Xceed.Wpf.AvalonDock.NET5.resources.dll
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\CheckoutOrder.g.cs
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\CheckoutOrder.baml
