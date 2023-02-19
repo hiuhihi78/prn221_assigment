@@ -10,11 +10,11 @@ namespace WPF_Project.Services
 {
     public class StaffService
     {
-        public ShopTestContext context;
+        public ShopDbContext context;
 
         public StaffService()
         {
-            context = new ShopTestContext();
+            context = new ShopDbContext();
         }
 
         public Staff GetUser(StaffDTO staff)
@@ -39,7 +39,7 @@ namespace WPF_Project.Services
                     Password = staffDTO.Password,
                     Address = staffDTO.Address,
                     Fullname = staffDTO.Fullname,
-                    IsManager = false,
+                    Role = 1,
                     Phone = staffDTO.Phone,
                     Status = false
                 };

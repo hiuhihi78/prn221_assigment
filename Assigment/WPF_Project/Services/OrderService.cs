@@ -12,7 +12,7 @@ namespace WPF_Project.Services
 {
     public class OrderService
     {
-        private ShopTestContext context = new ShopTestContext();
+        private ShopDbContext context = new ShopDbContext();
         public OrderService() { }
 
         public bool AddNewOrder(ObservableCollection<ProductDTO> listOrder, Order orderInfo)

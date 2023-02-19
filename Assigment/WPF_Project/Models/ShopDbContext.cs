@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace WPF_Project.Models;
 
-public partial class ShopTestContext : DbContext
+public partial class ShopDbContext : DbContext
 {
-    public ShopTestContext()
+    public ShopDbContext()
     {
     }
 
-    public ShopTestContext(DbContextOptions<ShopTestContext> options)
+    public ShopDbContext(DbContextOptions<ShopDbContext> options)
         : base(options)
     {
     }
@@ -27,11 +27,15 @@ public partial class ShopTestContext : DbContext
 
     public virtual DbSet<Product> Products { get; set; }
 
+    public virtual DbSet<Role> Roles { get; set; }
+
     public virtual DbSet<Staff> Staff { get; set; }
+
+    public virtual DbSet<Supplier> Suppliers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=localhost;Initial Catalog=ShopTest;Persist Security Info=False;User ID=sa;Password=sa;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
+        => optionsBuilder.UseSqlServer("Server=localhost;Initial Catalog=ShopDB;Persist Security Info=False;User ID=sa;Password=sa;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=True;Connection Timeout=30;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -54,12 +58,18 @@ public partial class ShopTestContext : DbContext
                 .HasColumnType("date")
                 .HasColumnName("import_Date");
             entity.Property(e => e.StaffId).HasColumnName("staffID");
+            entity.Property(e => e.SupplierId).HasColumnName("supplierId");
             entity.Property(e => e.TotalAmount).HasColumnName("totalAmount");
 
             entity.HasOne(d => d.Staff).WithMany(p => p.Imports)
                 .HasForeignKey(d => d.StaffId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK_Import_Staff");
+
+            entity.HasOne(d => d.Supplier).WithMany(p => p.Imports)
+                .HasForeignKey(d => d.SupplierId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Import_Supplier");
         });
 
         modelBuilder.Entity<ImportDetail>(entity =>
@@ -148,6 +158,16 @@ public partial class ShopTestContext : DbContext
                 .HasConstraintName("FK_Product_Category");
         });
 
+        modelBuilder.Entity<Role>(entity =>
+        {
+            entity.ToTable("Role");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Name)
+                .HasMaxLength(50)
+                .HasColumnName("name");
+        });
+
         modelBuilder.Entity<Staff>(entity =>
         {
             entity.Property(e => e.Id).HasColumnName("id");
@@ -155,17 +175,37 @@ public partial class ShopTestContext : DbContext
             entity.Property(e => e.Fullname)
                 .HasMaxLength(150)
                 .HasColumnName("fullname");
-            entity.Property(e => e.IsManager).HasColumnName("isManager");
             entity.Property(e => e.Password)
                 .HasMaxLength(50)
                 .HasColumnName("password");
             entity.Property(e => e.Phone)
                 .HasMaxLength(50)
                 .HasColumnName("phone");
+            entity.Property(e => e.Role).HasColumnName("role");
             entity.Property(e => e.Status).HasColumnName("status");
             entity.Property(e => e.Username)
                 .HasMaxLength(50)
                 .HasColumnName("username");
+
+            entity.HasOne(d => d.RoleNavigation).WithMany(p => p.Staff)
+                .HasForeignKey(d => d.Role)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK_Staff_Role");
+        });
+
+        modelBuilder.Entity<Supplier>(entity =>
+        {
+            entity.ToTable("Supplier");
+
+            entity.Property(e => e.Id).HasColumnName("id");
+            entity.Property(e => e.Address).HasColumnName("address");
+            entity.Property(e => e.Name)
+                .HasMaxLength(100)
+                .HasColumnName("name");
+            entity.Property(e => e.Phone)
+                .HasMaxLength(10)
+                .IsFixedLength()
+                .HasColumnName("phone");
         });
 
         OnModelCreatingPartial(modelBuilder);

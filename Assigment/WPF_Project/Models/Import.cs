@@ -13,7 +13,11 @@ public partial class Import
 
     public double? TotalAmount { get; set; }
 
+    public int SupplierId { get; set; }
+
     public virtual ICollection<ImportDetail> ImportDetails { get; } = new List<ImportDetail>();
 
     public virtual Staff Staff { get; set; } = null!;
+
+    public virtual Supplier Supplier { get; set; } = null!;
 }

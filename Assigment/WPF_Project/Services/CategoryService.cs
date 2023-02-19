@@ -12,7 +12,7 @@ namespace WPF_Project.Services
 {
     public class CategoryService
     {
-        private ShopTestContext context = new ShopTestContext();
+        private ShopDbContext context = new ShopDbContext();
         public CategoryService() { }
 
         public ObservableCollection<CategoryDTO> GetAllCategory()

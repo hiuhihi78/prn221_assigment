@@ -63,11 +63,11 @@ namespace WPF_Project.DTOs
         }
 
 
-        private bool isManager;
-        public bool IsManager
+        private int role;
+        public int Role
         {
-            get { return isManager; }
-            set { isManager = value; OnPropertyChanged(); }
+            get { return role; }
+            set { role = value; OnPropertyChanged(); }
         }
 
         private bool status;

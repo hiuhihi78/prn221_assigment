@@ -17,11 +17,13 @@ public partial class Staff
 
     public string Address { get; set; } = null!;
 
-    public bool IsManager { get; set; }
+    public int Role { get; set; }
 
     public bool Status { get; set; }
 
     public virtual ICollection<Import> Imports { get; } = new List<Import>();
 
     public virtual ICollection<Order> Orders { get; } = new List<Order>();
+
+    public virtual Role RoleNavigation { get; set; } = null!;
 }
