@@ -1,0 +1,183 @@
+﻿<Page x:Class="WPF_Project.Views.Import"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Views"
+
+      mc:Ignorable="d" 
+      Title="Import"
+      
+      xmlns:ValidationRule="clr-namespace:WPF_Project.Validation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="650" d:DesignWidth="1100"
+      FontSize="15">
+
+    <Canvas>
+        <TextBlock
+            Text="IMPORT"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Left" 
+            Canvas.Left="17" VerticalAlignment="Top" Canvas.Top="27"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Product's name"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="107" Canvas.Top="84" HorizontalAlignment="Left" VerticalAlignment="Center" Width="395" RenderTransformOrigin="0.501,0.559"
+            Text="{Binding SearchProductName}"
+            />
+        <ComboBox
+            materialDesign:HintAssist.Hint="Product's category"
+            x:Name="cboCategory"
+            Width="280"
+            IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+            Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="107" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Center"
+            
+            ItemsSource="{Binding Categorys}" 
+            DisplayMemberPath="Name" 
+            SelectedValuePath="Id" 
+            SelectedValue="{Binding SelectedCategory}"
+            />
+
+        <Button
+            Content="Search"
+            Command="{Binding SearchProduct}"
+            Style="{StaticResource MaterialDesignRaisedLightButton}"
+            ToolTip="Resource name: MaterialDesignRaisedLightButton" 
+            Canvas.Left="406" Canvas.Top="156" HorizontalAlignment="Left" 
+            VerticalAlignment="Center" Width="96" Height="45" 
+            />
+        <TextBlock Text="Create new product" Canvas.Left="20" Canvas.Top="252" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+        <TextBlock
+            Text="Products"
+            FontSize="17"
+            FontWeight="DemiBold" HorizontalAlignment="Left" 
+            Canvas.Left="326" VerticalAlignment="Center" Canvas.Top="234"/>
+
+        <TextBlock
+            Text="Cart"
+            FontSize="17"
+            FontWeight="DemiBold" HorizontalAlignment="Center" 
+            Canvas.Left="919" VerticalAlignment="Top" Canvas.Top="245"/>
+
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding Products}"
+            SelectedItem="{Binding SelectedProduct}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="301" Canvas.Left="20" Canvas.Top="277" HorizontalAlignment="Left" VerticalAlignment="Top" Width="678"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
+                <DataGridTemplateColumn Header="Actions" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.AddToCart, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="PlusThick" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid
+            CanUserAddRows="False"
+            ItemsSource="{Binding ListOrderProduct, Mode=TwoWay}"
+            SelectedItem="{Binding SelectedRemoveProduct}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            HorizontalAlignment="Left" 
+            Canvas.Left="720" 
+            VerticalAlignment="Top"
+            ScrollViewer.CanContentScroll="True" 
+            Height="257" Canvas.Top="282" Width="370"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="160" />
+                <DataGridTemplateColumn Header="Quantity">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Quantity}" Width="80"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Header="Actions">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.RemoveProductInCart , RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}" 
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="CloseThick" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Label Content="Total:" 
+               FontSize="24"
+               Canvas.Left="741" Canvas.Top="538"
+               HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        <TextBlock
+            Text="{Binding TotalPriceOrder}"
+            Width="200" Canvas.Left="831" Canvas.Top="507"
+            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
+            />
+        <Button
+            Command="{Binding CheckoutOrder}"
+            IsEnabled="{Binding EnableButtonCheckout}"
+            Canvas.Left="895" Canvas.Top="587" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Width="115" Height="53"
+            Background="#49be25"
+            FontSize="40"
+            >
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="CartArrowRight" />
+            </Button.Content>
+        </Button>
+
+        <TextBox
+            materialDesign:HintAssist.HelperText="Helper text"
+            materialDesign:HintAssist.Hint="Text (validated)"
+            Style="{StaticResource MaterialDesignFilledTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="368" Canvas.Left="663" Canvas.Top="47">
+            <TextBox.Text>
+                <Binding
+                    Path="Name"
+                    UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <ValidationRule:NotEmptyValidationRule
+                            ValidatesOnTargetUpdated="True" />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+    </Canvas>
+</Page>

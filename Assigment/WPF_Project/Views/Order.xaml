@@ -18,27 +18,20 @@
             FontSize="30"
             FontWeight="Bold" HorizontalAlignment="Left" Canvas.Left="17" VerticalAlignment="Top" Canvas.Top="27"
             />
-        <Label 
-            Name="lbProductName" 
-            Content="Product" 
-            Canvas.Left="60"
-            Canvas.Top="124" HorizontalAlignment="Center" VerticalAlignment="Top"/>
         <TextBox
+            materialDesign:HintAssist.Hint="Product's name"
             materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
             MaxLength="40"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            TextWrapping="Wrap" Canvas.Left="157" Canvas.Top="100" HorizontalAlignment="Center" VerticalAlignment="Top" Width="293" RenderTransformOrigin="0.501,0.559"
+            TextWrapping="Wrap" Canvas.Left="107" Canvas.Top="84" HorizontalAlignment="Left" VerticalAlignment="Center" Width="395" RenderTransformOrigin="0.501,0.559"
             Text="{Binding SearchProductName}"
             />
-        <Label
-            Name="lbCategory"
-            Content="Category" Canvas.Left="60" Canvas.Top="181" HorizontalAlignment="Center" VerticalAlignment="Top"
-            />
         <ComboBox
-            x:Name="FilledComboBox"
-            Width="293"
+            materialDesign:HintAssist.Hint="Product's category"
+            x:Name="cboCategory"
+            Width="280"
             IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
-            Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="157" Canvas.Top="162" HorizontalAlignment="Center" VerticalAlignment="Top"
+            Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="107" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Center"
             
             ItemsSource="{Binding Categorys}" 
             DisplayMemberPath="Name" 
@@ -51,9 +44,21 @@
             Command="{Binding SearchProduct}"
             Style="{StaticResource MaterialDesignRaisedLightButton}"
             ToolTip="Resource name: MaterialDesignRaisedLightButton" 
-            Canvas.Left="477" Canvas.Top="165" HorizontalAlignment="Left" 
-            VerticalAlignment="Top" Width="105" Height="45" 
+            Canvas.Left="406" Canvas.Top="156" HorizontalAlignment="Left" 
+            VerticalAlignment="Center" Width="96" Height="45" 
             />
+
+        <TextBlock
+            Text="Products"
+            FontSize="17"
+            FontWeight="DemiBold" HorizontalAlignment="Left" 
+            Canvas.Left="315" VerticalAlignment="Top" Canvas.Top="231"/>
+
+        <TextBlock
+            Text="Cart"
+            FontSize="17"
+            FontWeight="DemiBold" HorizontalAlignment="Left" 
+            Canvas.Left="879" VerticalAlignment="Top" Canvas.Top="238"/>
 
         <DataGrid
             Name="gridProducts"
@@ -65,7 +70,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ScrollViewer.CanContentScroll="True" 
-            Height="301" Canvas.Left="17" Canvas.Top="246" HorizontalAlignment="Left" VerticalAlignment="Center" Width="678"
+            Height="301" Canvas.Left="10" Canvas.Top="277" HorizontalAlignment="Left" VerticalAlignment="Top" Width="678"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
@@ -101,7 +106,7 @@
             Canvas.Left="710" 
             VerticalAlignment="Center"
             ScrollViewer.CanContentScroll="True" 
-            Height="244" Canvas.Top="259" Width="370"
+            Height="244" Canvas.Top="277" Width="370"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="160" />
@@ -131,19 +136,19 @@
 
         <Label Content="Total:" 
                FontSize="24"
-               Canvas.Left="745" Canvas.Top="503"
-               HorizontalAlignment="Center" VerticalAlignment="Top"/>
+               Canvas.Left="737" Canvas.Top="538"
+               HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBlock
             Text="{Binding TotalPriceOrder}"
-            Width="200" Canvas.Left="831" Canvas.Top="507"
-            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
+            Width="200" Canvas.Left="807" Canvas.Top="542"
+            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center"
             />
         <Button
             Command="{Binding CheckoutOrder}"
             IsEnabled="{Binding EnableButtonCheckout}"
-            Canvas.Left="900" Canvas.Top="560" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" 
-            Width="133" Height="67"
+            Canvas.Left="912" Canvas.Top="584" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Width="95" Height="56"
             Background="#49be25"
             FontSize="40"
             >
@@ -154,10 +159,5 @@
                     Kind="CartArrowRight" />
             </Button.Content>
         </Button>
-
-        <Rectangle Height="364" Canvas.Left="702"
-                   Stroke="Black" Canvas.Top="188" 
-                   Width="375" HorizontalAlignment="Center"
-                   VerticalAlignment="Top"/>
     </Canvas>
 </Page>

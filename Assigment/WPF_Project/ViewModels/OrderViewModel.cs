@@ -78,13 +78,7 @@ namespace WPF_Project.ViewModels
             set { selectedCategory = value; OnPropertyChanged(); }
         }
 
-        private RelayCommand searchProduct;
 
-        public RelayCommand SearchProduct
-        {
-            get { return searchProduct; }
-            set { searchProduct = value; OnPropertyChanged(); }
-        }
 
         private string searchProductName;
 
@@ -247,6 +241,14 @@ namespace WPF_Project.ViewModels
 
         #region Search product
 
+        private RelayCommand searchProduct;
+
+        public RelayCommand SearchProduct
+        {
+            get { return searchProduct; }
+            set { searchProduct = value; OnPropertyChanged(); }
+        }
+
         public void ExecuteSearchProduct()
         {
             ObservableCollection<ProductDTO> result = new ObservableCollection<ProductDTO>();
@@ -278,7 +280,6 @@ namespace WPF_Project.ViewModels
         #endregion
 
         #region Update total price order
-
         public void UpdateTotalPriceOrder()
         {
             double total = 0;
@@ -319,7 +320,6 @@ namespace WPF_Project.ViewModels
             }
             NavigationFrameContentHomeScreen.NavigateTo(new CheckoutOrder());
         }
-
         #endregion
     }
 }

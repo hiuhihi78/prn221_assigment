@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\App.xaml
-51735355559
+6569168078
 
-34-1683805097
+3862270847
 230962503757
-MainWindow.xaml;Views\CheckoutOrder.xaml;Views\Home.xaml;Views\Login.xaml;Views\Order.xaml;
+MainWindow.xaml;Views\CheckoutOrder.xaml;Views\Home.xaml;Views\Import.xaml;Views\Login.xaml;Views\Order.xaml;
 
-False
+True
 

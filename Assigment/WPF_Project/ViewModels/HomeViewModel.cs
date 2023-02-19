@@ -54,7 +54,7 @@ namespace WPF_Project.ViewModels
         #endregion
 
 
-        #region handle click tabItem Order
+        #region handle click tabItem Import
 
         private RelayCommand clickImportCommand;
 
@@ -66,7 +66,7 @@ namespace WPF_Project.ViewModels
 
         public void HandleOpenImportScreen()
         {
-            NavigationFrameContentHomeScreen.NavigateTo(new Login());
+            NavigationFrameContentHomeScreen.NavigateTo(new Import());
         }
 
         #endregion
