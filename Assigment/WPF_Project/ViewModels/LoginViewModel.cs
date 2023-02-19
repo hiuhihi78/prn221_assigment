@@ -76,6 +76,7 @@ namespace WPF_Project.ViewModels
                 var user = staffService.GetUser(Staff);
                 if (user != null)
                 {
+                    NavigationParameters.Parameters.Add("currentUser", user);
                     NavigationService.NavigateTo(new Home());
                 }
                 else

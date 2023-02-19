@@ -5,10 +5,121 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_Project.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="CheckoutOrder">
+      Title="CheckoutOrder"
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="650" d:DesignWidth="1100"
+      FontSize="15"
+      >
 
-    <Grid>
-        
-    </Grid>
+    <Canvas>
+        <TextBlock
+            Text="CHECKOUT ORDER"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Left" Canvas.Left="17" VerticalAlignment="Top" Canvas.Top="27"
+            />
+        <TextBlock 
+            Text="Products ordered" 
+            FontSize="20"
+            Canvas.Left="240" Canvas.Top="124" 
+            HorizontalAlignment="Center" VerticalAlignment="Top"
+            />
+
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding ListOrderProduct}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="301" Canvas.Left="17" Canvas.Top="174" HorizontalAlignment="Center" VerticalAlignment="Top" Width="600"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBlock 
+            Text="Customer's info" 
+            FontSize="20"
+            Canvas.Left="828" Canvas.Top="137" 
+            HorizontalAlignment="Left" VerticalAlignment="Top"
+            />
+        <TextBox
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Full Name"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Canvas.Left="745" Canvas.Top="174" 
+            HorizontalAlignment="Center" Width="315"
+            Text="{Binding Username, Mode=TwoWay}"
+            MaxLength="30"/>
+
+        <TextBox
+            VerticalAlignment="Center"
+            materialDesign:HintAssist.Hint="Phone"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Canvas.Left="745" Canvas.Top="250" 
+            HorizontalAlignment="Center" Width="315"
+            Text="{Binding Phone, Mode=TwoWay}" 
+            MaxLength="10"/>
+
+        <TextBox
+            VerticalAlignment="Top"
+            materialDesign:HintAssist.Hint="Address"
+            Style="{StaticResource MaterialDesignOutlinedTextBox}" 
+            Canvas.Left="745" Canvas.Top="325" 
+            HorizontalAlignment="Center" Width="315"
+            Text="{Binding Address, Mode=TwoWay}" 
+            MaxLength="100"/>
+
+
+        <Label Content="Total:" 
+               FontSize="24"
+               Canvas.Left="745" Canvas.Top="445"
+               HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock
+            Text="{Binding TotalPriceOrder}"
+            Width="200" Canvas.Left="833" Canvas.Top="453"
+            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
+            />
+
+        <Button
+            Command="{Binding BackToPreviousScreen}"
+            Canvas.Left="764" Canvas.Top="511" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Width="133" Height="67"
+            Background="#0077d0"
+            FontSize="40"
+            >
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="KeyboardReturn" />
+            </Button.Content>
+        </Button>
+
+        <Button
+            Command="{Binding CheckoutOrderProduct}"
+            Canvas.Left="927" Canvas.Top="511" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Width="133" Height="67"
+            Background="#49be25"
+            FontSize="40"
+            >
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="CartArrowRight" />
+            </Button.Content>
+        </Button>
+
+    </Canvas>
 </Page>

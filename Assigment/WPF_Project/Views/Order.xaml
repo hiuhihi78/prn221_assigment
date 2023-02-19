@@ -5,14 +5,14 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:WPF_Project.Views"
       mc:Ignorable="d" 
-      d:DesignHeight="650" d:DesignWidth="1100"
       Title="Order"
-      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="650" d:DesignWidth="1100"
       FontSize="15"
       >
 
-    <Canvas Margin="7,-11,-7,11">
+    <Canvas>
         <TextBlock
             Text="ORDER"
             FontSize="30"

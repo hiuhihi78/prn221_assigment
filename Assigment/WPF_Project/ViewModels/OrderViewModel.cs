@@ -131,6 +131,7 @@ namespace WPF_Project.ViewModels
             totalPriceOrder = 0;
             enableButtonCheckout = false;
             checkoutOrder = new RelayCommand(ExecuteCheckoutOrder);
+            LoadListProductOrderd();
             LoadAllCategorys();
             LoadAllProducts();
         }
@@ -149,6 +150,23 @@ namespace WPF_Project.ViewModels
             Categorys = categoryService.GetAllCategory();
             Categorys.Add(new CategoryDTO { Id = 0, Name = "All Category" });
         }
+        #endregion
+
+        #region Load list product ordered
+
+        public void LoadListProductOrderd()
+        {
+            try
+            {
+                var productsOrdered = (ObservableCollection<ProductDTO>)NavigationParameters.Parameters["listOrder"];
+                listOrderProduct = productsOrdered;
+            }
+            catch(Exception ex) //-- not found
+            {
+                listOrderProduct = new ObservableCollection<ProductDTO>();
+            }
+        }
+
         #endregion
 
         #region Add to cart
@@ -291,7 +309,14 @@ namespace WPF_Project.ViewModels
 
         private void ExecuteCheckoutOrder()
         {
-            NavigationParameters.Parameters.Add("listOrder", ListOrderProduct);
+            if (!NavigationParameters.Parameters.ContainsKey("listOrder"))
+            {
+                NavigationParameters.Parameters.Add("listOrder", ListOrderProduct);
+            }
+            if (!NavigationParameters.Parameters.ContainsKey("totalPriceOrder"))
+            {
+                NavigationParameters.Parameters.Add("totalPriceOrder", TotalPriceOrder);
+            }
             NavigationFrameContentHomeScreen.NavigateTo(new CheckoutOrder());
         }
 

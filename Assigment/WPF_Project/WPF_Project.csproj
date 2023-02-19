@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ViewModels\LoginViewModel.cs~RFb6f7c57.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Extended.Wpf.Toolkit" Version="4.5.0" />
     <PackageReference Include="MaterialDesignThemes" Version="4.7.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
@@ -19,6 +23,7 @@
 
   <ItemGroup>
     <Folder Include="Images\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
