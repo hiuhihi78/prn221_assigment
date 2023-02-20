@@ -296,7 +296,7 @@ namespace WPF_Project.ViewModels
             {
                 NavigationParameters.Parameters.Add("totalPriceImport", TotalPriceOrder);
             }
-            NavigationFrameContentHomeScreen.NavigateTo(new CheckoutOrder());
+            NavigationFrameContentHomeScreen.NavigateTo(new CheckoutImport());
         }
         #endregion
 

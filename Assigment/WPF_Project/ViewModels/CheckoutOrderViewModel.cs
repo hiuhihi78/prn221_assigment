@@ -67,7 +67,7 @@ namespace WPF_Project.ViewModels
             set { totalPriceOrder = value; OnPropertyChanged(); }
         }
 
-
+        
         #endregion
 
         #region Contructor
@@ -75,13 +75,15 @@ namespace WPF_Project.ViewModels
         public CheckoutOrderViewModel() 
         {
             GetDataOfPreviousScreen();
-            fullName= string.Empty; 
+            fullName = string.Empty; 
             phone= string.Empty;
             address= string.Empty;
             backToPreviousScreen = new RelayCommand(HandleBackToPreviousScreen);
             checkoutOrderProduct = new RelayCommand(HandleChecoutOrderProducts);
         }
         #endregion
+
+        
 
         #region Get data in Order screen (products ordered, total price order)
         public void GetDataOfPreviousScreen()
