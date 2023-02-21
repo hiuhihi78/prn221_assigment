@@ -40,5 +40,25 @@ namespace WPF_Project.Services
             return result;
         }
 
+        public ObservableCollection<SupplierDTO> GetSuppliersByCondition(string nameOrPhone)
+        {
+            List<Supplier> suppliers = new List<Supplier>();
+            if (nameOrPhone == string.Empty || nameOrPhone == null)
+            {
+                suppliers = context.Suppliers.ToList();
+            }
+            else
+            {
+                suppliers = context.Suppliers.Where(x => x.Name.Contains(nameOrPhone) || x.Phone.Contains(nameOrPhone)).ToList();
+            }
+            var result = new ObservableCollection<SupplierDTO>();
+            foreach (var item in suppliers)
+            {
+                SupplierDTO supplierDTO = SupplierDTO.FromProduct(item);
+                result.Add(supplierDTO);
+            }
+            return result;
+        }
+
     }
 }

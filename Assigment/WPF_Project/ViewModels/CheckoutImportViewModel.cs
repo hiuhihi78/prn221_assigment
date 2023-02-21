@@ -50,20 +50,12 @@ namespace WPF_Project.ViewModels
             set { listSupplier = value; OnPropertyChanged(); }
         }
 
-        private string searchSupplierName;
+        private string searchSupplier;
 
-        public string SearchSupplierName
+        public string SearchSupplier
         {
-            get { return searchSupplierName; }
-            set { searchSupplierName = value; OnPropertyChanged(); GetListSupplier(); }
-        }
-
-        private string searchSupplierPhone;
-
-        public string SearchSupplierPhone
-        {
-            get { return searchSupplierPhone; }
-            set { searchSupplierPhone = value; OnPropertyChanged(); GetListSupplier(); }
+            get { return searchSupplier; }
+            set { searchSupplier = value; OnPropertyChanged(); GetListSupplier(); }
         }
 
 
@@ -74,10 +66,10 @@ namespace WPF_Project.ViewModels
         public CheckoutImportViewModel()
         {
             GetDataOfPreviousScreen();
-            searchSupplierName= string.Empty;
-            searchSupplierPhone= string.Empty;
+            SearchSupplier = string.Empty;
             backToPreviousScreen = new RelayCommand(HandleBackToPreviousScreen);
             checkoutImportProduct = new RelayCommand(HandleChecoutImportProducts);
+            GetListSupplier();
         }
         #endregion
 
@@ -93,7 +85,7 @@ namespace WPF_Project.ViewModels
         public void GetListSupplier()
         {
             SupplierService supplierService = new SupplierService();
-            ListSupplier = supplierService.GetSuppliersByCondition(SearchSupplierName,SearchSupplierPhone);
+            ListSupplier = supplierService.GetSuppliersByCondition(SearchSupplier);
         }
         #endregion
 

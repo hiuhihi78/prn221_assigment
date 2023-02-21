@@ -32,7 +32,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ScrollViewer.CanContentScroll="True" 
-            Height="301" Canvas.Left="71" Canvas.Top="174" HorizontalAlignment="Left" VerticalAlignment="Center" Width="600"
+            Height="301" Canvas.Left="17" Canvas.Top="176" HorizontalAlignment="Left" VerticalAlignment="Top" Width="586"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
@@ -46,91 +46,64 @@
         <TextBlock 
             Text="Supplier's info" 
             FontSize="20"
-            Canvas.Left="828" Canvas.Top="137" 
+            Canvas.Left="776" Canvas.Top="134" 
             HorizontalAlignment="Left" VerticalAlignment="Top"
             />
 
-        <ComboBox
-            materialDesign:HintAssist.Hint="Supplier's Name"
-            materialDesign:TextFieldAssist.HasClearButton="True"
-            IsEditable="True"
-            ItemsSource="{Binding ListSupplier}"
-            Style="{StaticResource MaterialDesignFilledComboBox}"
-            Canvas.Left="745" Canvas.Top="174" 
-            HorizontalAlignment="Center" Width="300"
-            DisplayMemberPath="Name" 
-            SelectedValuePath="Id" 
-            >
-            <ComboBox.SelectedItem>
-                <Binding
-                    Mode="TwoWay"
-                    Path="SelectedSupplierName"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </ComboBox.SelectedItem>
-            <ComboBox.Text>
-                <Binding
-                    Mode="TwoWay"
-                    Path="SearchSupplierName"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </ComboBox.Text>
-        </ComboBox>
+        <TextBox
+            materialDesign:HintAssist.Hint="This is a limited text area"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="636" Canvas.Top="182" HorizontalAlignment="Left" VerticalAlignment="Center" Width="399" 
+            Text="{Binding SearchSupplier , UpdateSourceTrigger=PropertyChanged}"
+            />
 
-        <ComboBox
-            materialDesign:HintAssist.Hint="Supplier's Phone"
-            materialDesign:TextFieldAssist.HasClearButton="True"
-            IsEditable="True"
+
+        <DataGrid
+            CanUserAddRows="False"
             ItemsSource="{Binding ListSupplier}"
-            Style="{StaticResource MaterialDesignFilledComboBox}"
-            Canvas.Left="745" Canvas.Top="240" 
-            HorizontalAlignment="Center" Width="300" VerticalAlignment="Center"
-            DisplayMemberPath="Name" 
-            SelectedValuePath="Id" 
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="167" Canvas.Left="633" Canvas.Top="252" HorizontalAlignment="Left" VerticalAlignment="Center" Width="402" 
             >
-            <ComboBox.SelectedItem>
-                <Binding
-                    Mode="TwoWay"
-                    Path="SelectedSupplierPhone"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </ComboBox.SelectedItem>
-            <ComboBox.Text>
-                <Binding
-                    Mode="TwoWay"
-                    Path="SearchSupplierPhone"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </ComboBox.Text>
-        </ComboBox>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="100" />
+            </DataGrid.Columns>
+        </DataGrid>
+
 
         <TextBox
-            Height="100"
+            Height="53"
             materialDesign:HintAssist.Hint="This is a text area"
             AcceptsReturn="True"
             Style="{StaticResource MaterialDesignOutlinedTextBox}"
             TextWrapping="Wrap"
             VerticalScrollBarVisibility="Auto" 
-            Canvas.Left="745" Canvas.Top="307" 
+            Canvas.Left="635" Canvas.Top="419" 
             HorizontalAlignment="Left" VerticalAlignment="Center"
-            Width="300" />
+            Width="398" />
 
 
         <Label Content="Total:" 
                FontSize="24"
-               Canvas.Left="745" Canvas.Top="445"
-               HorizontalAlignment="Center" VerticalAlignment="Top"/>
+               Canvas.Left="710" Canvas.Top="469"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBlock
             Text="{Binding TotalPriceOrder}"
-            Width="200" Canvas.Left="833" Canvas.Top="453"
+            Width="200" Canvas.Left="791" Canvas.Top="477"
             FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
             />
 
         <Button
             Command="{Binding BackToPreviousScreen}"
-            Canvas.Left="764" Canvas.Top="511" 
-            HorizontalAlignment="Left" VerticalAlignment="Center" 
-            Width="133" Height="67"
+            Canvas.Left="710" Canvas.Top="544" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Width="133" Height="68"
             Background="#0077d0"
             FontSize="40"
             >
@@ -144,8 +117,8 @@
 
         <Button
             Command="{Binding CheckoutOrderProduct}"
-            Canvas.Left="927" Canvas.Top="511" 
-            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Canvas.Left="900" Canvas.Top="545" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
             Width="133" Height="67"
             Background="#49be25"
             FontSize="40"
