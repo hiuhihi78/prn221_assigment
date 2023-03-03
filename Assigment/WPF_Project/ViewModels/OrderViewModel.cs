@@ -205,6 +205,7 @@ namespace WPF_Project.ViewModels
             }
 
             UpdateTotalPriceOrder();
+            UpdateValueNavigationParameter();
         }
 
         private bool CanExecuteAddProductToListOrder(ProductDTO product)
@@ -227,6 +228,7 @@ namespace WPF_Project.ViewModels
         private void ExecuteDeleteProductInCart(ProductDTO selectedRemoveProduct)
         {
             listOrderProduct.Remove(selectedRemoveProduct);
+            UpdateValueNavigationParameter();
         }
 
         private bool CanExecuteDeleteProductInCart(ProductDTO selectedRemoveProduct)
@@ -310,16 +312,34 @@ namespace WPF_Project.ViewModels
 
         private void ExecuteCheckoutOrder()
         {
+            NavigationFrameContentHomeScreen.NavigateTo(new CheckoutOrder());
+        }
+        #endregion
+
+        #region Update value Navigation Parameter
+
+        public void UpdateValueNavigationParameter()
+        {
             if (!NavigationParameters.Parameters.ContainsKey("listOrder"))
             {
+                NavigationParameters.Parameters.Add("listOrder", ListOrderProduct);
+            }
+            else
+            {
+                NavigationParameters.Parameters.Remove("listOrder");
                 NavigationParameters.Parameters.Add("listOrder", ListOrderProduct);
             }
             if (!NavigationParameters.Parameters.ContainsKey("totalPriceOrder"))
             {
                 NavigationParameters.Parameters.Add("totalPriceOrder", TotalPriceOrder);
             }
-            NavigationFrameContentHomeScreen.NavigateTo(new CheckoutOrder());
+            else
+            {
+                NavigationParameters.Parameters.Remove("totalPriceOrder");
+                NavigationParameters.Parameters.Add("totalPriceOrder", TotalPriceOrder);
+            }
         }
+
         #endregion
     }
 }

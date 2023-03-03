@@ -68,7 +68,6 @@
             Name="gridProducts"
             CanUserAddRows="False"
             ItemsSource="{Binding Products}"
-            SelectedItem="{Binding SelectedProduct}"
             SelectionMode="Extended"
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
