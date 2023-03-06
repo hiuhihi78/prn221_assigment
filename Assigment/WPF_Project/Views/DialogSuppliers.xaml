@@ -1,0 +1,79 @@
+﻿<Window x:Class="WPF_Project.Views.DialogSuppliers"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Views"
+      mc:Ignorable="d" 
+      
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
+      FontSize="15"
+                
+    WindowStartupLocation="CenterScreen"
+    WindowStyle="None"
+    Background="WhiteSmoke" Width="901" Height="544"
+    >
+    <Canvas Margin="0,0,10,0">
+        <TextBlock Text="Suppilers's Information"
+                   FontSize="25"
+                   FontWeight="Bold"
+                   Canvas.Left="30" Canvas.Top="10" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Supplier's info"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="30" Canvas.Top="72" HorizontalAlignment="Left" VerticalAlignment="Top" Width="399" 
+            Text="{Binding SearchSupplier , UpdateSourceTrigger=PropertyChanged}"
+            />
+
+        <DataGrid
+            CanUserAddRows="False"
+            ItemsSource="{Binding ListSupplier}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="264" Canvas.Left="30" Canvas.Top="153" HorizontalAlignment="Left" VerticalAlignment="Center" Width="819" 
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="250"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="150" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="250"/>
+                <DataGridTemplateColumn Header="Actions" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.SelectedSupplier, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                Background="#49be25"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="TargetAccount" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button
+            Canvas.Left="678" Canvas.Top="449" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Width="133" Height="68"
+            Background="#0077d0"
+            FontSize="40" Click="Button_Click"
+            >
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="KeyboardReturn" />
+            </Button.Content>
+        </Button>
+
+    </Canvas>
+</Window>

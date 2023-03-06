@@ -123,6 +123,7 @@ public partial class ShopDbContext : DbContext
 
             entity.Property(e => e.OrderId).HasColumnName("orderID");
             entity.Property(e => e.ProductId).HasColumnName("productID");
+            entity.Property(e => e.Discount).HasColumnName("discount");
             entity.Property(e => e.Quantity).HasColumnName("quantity");
             entity.Property(e => e.SellPrice).HasColumnName("sellPrice");
 

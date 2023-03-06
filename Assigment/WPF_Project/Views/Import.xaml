@@ -11,9 +11,16 @@
       xmlns:ValidationRule="clr-namespace:WPF_Project.Validation"
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       d:DesignHeight="650" d:DesignWidth="1100"
-      FontSize="15">
+      FontSize="15"
+      
+      xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+      >
 
+    
     <Canvas>
+        
+
+
         <TextBlock
             Text="IMPORT"
             FontSize="30"
@@ -78,7 +85,17 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" />
-                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="100"/>
+                <DataGridTemplateColumn Header="Price"  Width="100">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <toolkit:DoubleUpDown 
+                                Value="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
+                                Minimum ="0"
+                                PreviewTextInput="DoubleUpDown_PreviewTextInput"
+                                />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
                 <DataGridTemplateColumn Header="Actions" Width="80">
@@ -143,12 +160,12 @@
                HorizontalAlignment="Left" VerticalAlignment="Top"/>
         <TextBlock
             Text="{Binding TotalPriceOrder}"
-            Width="200" Canvas.Left="831" Canvas.Top="507"
-            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
+            Width="200" Canvas.Left="831" Canvas.Top="540"
+            FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"
             />
         <Button
             Command="{Binding CheckoutOrder}"
-            IsEnabled="{Binding EnableButtonCheckout}"
+            IsEnabled="{Binding EnableButtonCheckout,Mode=TwoWay}"
             Canvas.Left="895" Canvas.Top="587" 
             HorizontalAlignment="Left" VerticalAlignment="Top" 
             Width="115" Height="53"
@@ -163,20 +180,6 @@
             </Button.Content>
         </Button>
 
-        <TextBox
-            materialDesign:HintAssist.HelperText="Helper text"
-            materialDesign:HintAssist.Hint="Text (validated)"
-            Style="{StaticResource MaterialDesignFilledTextBox}" HorizontalAlignment="Left" VerticalAlignment="Top" Width="368" Canvas.Left="663" Canvas.Top="47">
-            <TextBox.Text>
-                <Binding
-                    Path="Name"
-                    UpdateSourceTrigger="PropertyChanged">
-                    <Binding.ValidationRules>
-                        <ValidationRule:NotEmptyValidationRule
-                            ValidatesOnTargetUpdated="True" />
-                    </Binding.ValidationRules>
-                </Binding>
-            </TextBox.Text>
-        </TextBox>
+        
     </Canvas>
 </Page>

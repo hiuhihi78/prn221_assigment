@@ -35,6 +35,7 @@ namespace WPF_Project.Services
                          ProductId = item.Id,
                          SellPrice = item.Price,
                          Quantity = item.Quantity,  
+                         Discount= item.Discount,   
                      };
                     context.OrderDetails.Add(orderDetail);
 

@@ -105,6 +105,8 @@ namespace WPF_Project.ViewModels
             LoadListProductOrderd();
             LoadAllCategorys();
             LoadAllProducts();
+            UpdateTotalPriceOrder();
+            UpdateStatusCheckoutOrder();
         }
         #endregion
 
@@ -152,14 +154,14 @@ namespace WPF_Project.ViewModels
 
         private void ExecuteAddProductToListOrder(ProductDTO productSelected)
         {
-            bool productExsited = listOrderProduct.FirstOrDefault(x => x.Id == productSelected.Id) != null;
+            bool productExsited = ListOrderProduct.FirstOrDefault(x => x.Id == productSelected.Id) != null;
             if (productExsited)
             {
-                for (int i = 0; i < listOrderProduct.Count(); i++)
+                for (int i = 0; i < ListOrderProduct.Count(); i++)
                 {
-                    if (listOrderProduct[i].Id == productSelected.Id)
+                    if (ListOrderProduct[i].Id == productSelected.Id)
                     {
-                        listOrderProduct[i].Quantity = listOrderProduct[i].Quantity + 1;
+                        ListOrderProduct[i].Quantity = ListOrderProduct[i].Quantity + 1;
                     }
                 }
             }
@@ -177,11 +179,12 @@ namespace WPF_Project.ViewModels
                 else
                 {
                     product.Quantity = 1;
-                    listOrderProduct.Add(product);
+                    ListOrderProduct.Add(product);
                 }
             }
 
             UpdateTotalPriceOrder();
+            UpdateStatusCheckoutOrder();
             UpdateValueNavigationParameter();
         }
 
@@ -205,14 +208,14 @@ namespace WPF_Project.ViewModels
         private void ExecuteDeleteProductInCart(ProductDTO selectedRemoveProduct)
         {
             listOrderProduct.Remove(selectedRemoveProduct);
+            UpdateTotalPriceOrder();
+            UpdateStatusCheckoutOrder();
             UpdateValueNavigationParameter();
         }
 
         private bool CanExecuteDeleteProductInCart(ProductDTO selectedRemoveProduct)
         {
             bool productExisted = listOrderProduct.FirstOrDefault(x => x.Id == selectedRemoveProduct.Id) != null;
-            UpdateTotalPriceOrder();
-            UpdateStatusCheckoutOrder();
             return productExisted;
         }
 
@@ -224,7 +227,7 @@ namespace WPF_Project.ViewModels
             double total = 0;
             foreach (var product in ListOrderProduct)
             {
-                total += (product.Quantity * product.Price) - (product.Quantity * product.Price) * product.Discount / 100;
+                total += (product.Quantity * product.Price);
             }
             TotalPriceOrder = total;
         }

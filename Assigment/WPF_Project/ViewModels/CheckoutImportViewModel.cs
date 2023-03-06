@@ -1,17 +1,22 @@
-﻿using System;
+﻿using MaterialDesignThemes.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using WPF_Project.Command;
 using WPF_Project.DTOs;
 using WPF_Project.Navigation;
 using WPF_Project.Services;
 using WPF_Project.Views;
+using MaterialDesignThemes.Wpf;
+using System.Diagnostics;
 
 namespace WPF_Project.ViewModels
 {
@@ -50,12 +55,12 @@ namespace WPF_Project.ViewModels
             set { listSupplier = value; OnPropertyChanged(); }
         }
 
-        private string searchSupplier;
+        private SupplierDTO selectedhSupplier;
 
-        public string SearchSupplier
+        public SupplierDTO SelectedSupplier
         {
-            get { return searchSupplier; }
-            set { searchSupplier = value; OnPropertyChanged(); GetListSupplier(); }
+            get { return selectedhSupplier; }
+            set { selectedhSupplier = value; OnPropertyChanged(); }
         }
 
 
@@ -66,10 +71,16 @@ namespace WPF_Project.ViewModels
         public CheckoutImportViewModel()
         {
             GetDataOfPreviousScreen();
-            SearchSupplier = string.Empty;
+            selectedhSupplier = new SupplierDTO()
+            {
+                Name = string.Empty,
+                Phone = string.Empty,
+                Address = string.Empty,
+            };
             backToPreviousScreen = new RelayCommand(HandleBackToPreviousScreen);
             checkoutImportProduct = new RelayCommand(HandleChecoutImportProducts);
-            GetListSupplier();
+            openDialogSuppliers = new RelayCommand(ExecuteOpenDialogSuppliers);
+            UpdateSupplierInfo();
         }
         #endregion
 
@@ -78,14 +89,6 @@ namespace WPF_Project.ViewModels
         {
             ListOrderProduct = (ObservableCollection<ProductDTO>)NavigationParameters.Parameters["listImported"];
             TotalPriceOrder = (double)NavigationParameters.Parameters["totalPriceImport"];
-        }
-        #endregion
-
-        #region Get list suppliers
-        public void GetListSupplier()
-        {
-            SupplierService supplierService = new SupplierService();
-            ListSupplier = supplierService.GetSuppliersByCondition(SearchSupplier);
         }
         #endregion
 
@@ -118,21 +121,34 @@ namespace WPF_Project.ViewModels
 
         public void HandleChecoutImportProducts()
         {
+            if (string.IsNullOrEmpty(SelectedSupplier.Name))
+            {
+                MessageBox.Show("You must choose a supplier!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
+                return;
+            }
             MessageBoxResult comfrim = MessageBox.Show("Are you sure you want to do this?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
             if (comfrim == MessageBoxResult.Yes)
             {
-                Models.Order orderInfo = new Models.Order()
+                ImportService importService = new ImportService();  
+
+                Models.Import importInfo = new Models.Import()
                 {
                     StaffId = ((Models.Staff)NavigationParameters.Parameters["currentUser"]).Id,
+                    ImportDate = DateTime.Now,
+                    SupplierId = SelectedSupplier.Id,
+                    TotalAmount = double.Parse(TotalPriceOrder.ToString())
                 };
 
-                OrderService orderService = new OrderService();
-                if (true)
+                var importSuccess = importService.AddNewImport(ListOrderProduct, importInfo);
+
+
+                if (importSuccess)
                 {
                     MessageBox.Show("Success!", "Alter", MessageBoxButton.OK, MessageBoxImage.Information);
                     // remove cart
                     NavigationParameters.Parameters.Remove("listImported");
                     NavigationParameters.Parameters.Remove("totalPriceImport");
+                    NavigationParameters.Parameters.Remove("supplier");
                     // navigation Order screen
                     NavigationFrameContentHomeScreen.NavigateTo(new Import());
                 }
@@ -140,6 +156,37 @@ namespace WPF_Project.ViewModels
                 {
                     MessageBox.Show("Something was wrong!\nPlease ask administrator!", "Alter", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+            }
+        }
+        #endregion
+
+        #region Open dialog Suppliers
+        private RelayCommand openDialogSuppliers;
+
+        public RelayCommand OpenDialogSuppliers
+        {
+            get { return openDialogSuppliers; }
+            set { openDialogSuppliers = value; OnPropertyChanged(); }
+        }
+
+        public async void ExecuteOpenDialogSuppliers()
+        {
+            DialogSuppliers dialogSuppliers = new DialogSuppliers();
+            dialogSuppliers.DataContext = new DialogSuppierViewModel(dialogSuppliers,this);
+            dialogSuppliers.ShowDialog();
+        }
+
+
+
+        #endregion
+
+        #region Get info Supplier was choose
+        public void UpdateSupplierInfo()
+        {
+            if (Navigation.NavigationParameters.Parameters.ContainsKey("supplier"))
+            {
+                var supplier = (SupplierDTO)Navigation.NavigationParameters.Parameters["supplier"];
+                SelectedSupplier = supplier;
             }
         }
         #endregion

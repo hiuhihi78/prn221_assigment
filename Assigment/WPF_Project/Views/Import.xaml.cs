@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_Project.ViewModels;
+using Xceed.Wpf.Toolkit;
 
 namespace WPF_Project.Views
 {
@@ -25,6 +26,13 @@ namespace WPF_Project.Views
         {
             InitializeComponent();
             DataContext = new ImportViewModel();
+        }
+
+        private void DoubleUpDown_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            double val;
+            bool isDouble = double.TryParse(e.Text, out val);
+            e.Handled = !isDouble;
         }
     }
 }

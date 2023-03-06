@@ -13,6 +13,9 @@
     <Compile Update="Views\CheckoutOrder.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogSuppliers.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Import.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +34,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\CheckoutOrder.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\DialogSuppliers.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Import.xaml">
