@@ -173,3 +173,5 @@ D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-w
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\CheckoutImport.baml
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogSuppliers.g.cs
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogSuppliers.baml
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-windows\Microsoft.Expression.Interactions.dll
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-windows\System.Windows.Interactivity.dll

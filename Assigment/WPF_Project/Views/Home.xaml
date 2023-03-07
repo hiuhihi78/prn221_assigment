@@ -69,6 +69,28 @@
                         <MouseBinding MouseAction="LeftClick" Command="{Binding ClickImportCommand}"/>
                     </TabItem.InputBindings>
                 </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel
+                            Width="auto"
+                            Height="auto">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="GiftOutline" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="Import" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickImportCommand}"/>
+                    </TabItem.InputBindings>
+                </TabItem>
+
+
             </TabControl>
             <Frame Name="MainFrame" Grid.Column="1" Source="Order.xaml"/>
         </Grid>

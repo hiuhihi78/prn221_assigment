@@ -14,11 +14,12 @@
       FontSize="15"
       
       xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       >
 
-    
+
     <Canvas>
-        
+
 
 
         <TextBlock
@@ -89,13 +90,23 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <toolkit:DoubleUpDown 
-                                Value="{Binding Price, UpdateSourceTrigger=PropertyChanged}"
+                                Value="{Binding Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                                 Minimum ="0"
                                 PreviewTextInput="DoubleUpDown_PreviewTextInput"
-                                />
+                             >
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="ValueChanged">
+                                        <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}" />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </toolkit:DoubleUpDown>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
+
+
+                
+
                 <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
                 <DataGridTemplateColumn Header="Actions" Width="80">
@@ -180,6 +191,29 @@
             </Button.Content>
         </Button>
 
-        
+        <toolkit:DoubleUpDown Canvas.Left="657" Canvas.Top="130">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ValueChanged">
+                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </toolkit:DoubleUpDown>
+
+
+
+        <PasswordBox 
+                            Width="100"
+                            Name="password"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                            materialDesign:TextFieldAssist.UnderlineBrush="#64b5f6"
+                            materialDesign:HintAssist.Hint="Password"
+                            materialDesign:HintAssist.Foreground="#64b5f6"
+                            materialDesign:TextFieldAssist.HasClearButton="True" Canvas.Left="895" Canvas.Top="110">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="PasswordChanged">
+                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </PasswordBox>
     </Canvas>
 </Page>

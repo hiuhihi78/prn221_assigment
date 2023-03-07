@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using WPF_Project.Command;
 using WPF_Project.DTOs;
 using WPF_Project.Navigation;
@@ -42,7 +43,7 @@ namespace WPF_Project.ViewModels
         public ObservableCollection<ProductDTO> ListOrderProduct
         {
             get { return listOrderProduct; }
-            set { listOrderProduct = value; OnPropertyChanged(); }
+            set { listOrderProduct = value; OnPropertyChanged(); UpdateTotalPriceOrder(); UpdateStatusCheckoutOrder(); }
         }
 
         private ObservableCollection<CategoryDTO> categorys;
@@ -88,7 +89,7 @@ namespace WPF_Project.ViewModels
         #endregion
 
         #region Contructor
-        public ImportViewModel() 
+        public ImportViewModel()
         {
             productService = new ProductService();
             products = new ObservableCollection<ProductDTO>();
@@ -102,6 +103,8 @@ namespace WPF_Project.ViewModels
             totalPriceOrder = 0;
             enableButtonCheckout = false;
             checkoutOrder = new RelayCommand(ExecuteCheckoutOrder);
+            priceChangedCommand = new RelayCommand<ProductDTO>(ExecutePriceChangedCommand, p => true);
+            passwordChangedCommand = new RelayCommand<object>(HandleGetPassword, p => true);
             LoadListProductOrderd();
             LoadAllCategorys();
             LoadAllProducts();
@@ -121,12 +124,12 @@ namespace WPF_Project.ViewModels
 
         public void LoadListProductOrderd()
         {
-            try
+            if (NavigationParameters.Parameters.ContainsKey("listImported"))
             {
                 var productsOrdered = (ObservableCollection<ProductDTO>)NavigationParameters.Parameters["listImported"];
                 listOrderProduct = productsOrdered;
             }
-            catch (Exception ex) //-- not found
+            else
             {
                 listOrderProduct = new ObservableCollection<ProductDTO>();
             }
@@ -327,6 +330,46 @@ namespace WPF_Project.ViewModels
                 NavigationParameters.Parameters.Remove("totalPriceImport");
                 NavigationParameters.Parameters.Add("totalPriceImport", TotalPriceOrder);
             }
+        }
+
+        #endregion
+
+        #region PriceChangedCommand
+
+        private RelayCommand<ProductDTO> priceChangedCommand;
+
+        public RelayCommand<ProductDTO> PriceChangedCommand
+        {
+            get { return priceChangedCommand; }
+            set { priceChangedCommand = value; OnPropertyChanged(); }
+        }
+
+        public void ExecutePriceChangedCommand(ProductDTO product)
+        {
+
+        }
+
+        public bool CanExecutePriceChangedCommand(ProductDTO product)
+        {
+            return true;
+        }
+
+
+        #endregion
+
+
+        #region PasswordChangedCommand test
+        private RelayCommand<object> passwordChangedCommand;
+
+        public RelayCommand<object> PasswordChangedCommand
+        {
+            get { return passwordChangedCommand; }
+            set { passwordChangedCommand = value; }
+        }
+
+        private void HandleGetPassword(object passwordBox)
+        {
+            
         }
 
         #endregion
