@@ -180,3 +180,5 @@ D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-w
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\WPF_Project.pdb
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\WPF_Project.genruntimeconfig.cache
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\ref\WPF_Project.dll
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogCategorys.g.cs
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogCategorys.baml

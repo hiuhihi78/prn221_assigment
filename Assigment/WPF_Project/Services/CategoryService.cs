@@ -26,5 +26,16 @@ namespace WPF_Project.Services
             return result;
         }
 
+        public Category GetCategoryByName(string categoryName)
+        {
+            return context.Categories.FirstOrDefault(x => x.Name == categoryName);
+        }
+
+        public void CreateCategory(Category category)
+        {
+            context.Categories.Add(category);
+            context.SaveChanges();
+        }
+
     }
 }

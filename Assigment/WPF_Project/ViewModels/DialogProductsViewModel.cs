@@ -53,7 +53,6 @@ namespace WPF_Project.ViewModels
         }
 
         public bool IsEnableItem { get; set; }
-        public bool AllowEnableQuantityField { get; set; }  
         public string InnitProductName { get; set; }    
 
         private CategoryService categoryService;
@@ -78,9 +77,9 @@ namespace WPF_Project.ViewModels
             LoadData();
             LoadAllCategorys();
             CheckItemEnable();
-            AllowEnableQuantityField = productInfo == null;
             InnitProductName = productInfo == null ? string.Empty : ((ProductDTO)productInfo).Name;
             saveCommand = new RelayCommand(ExecuteSaveCommand);
+            createNewCategory = new RelayCommand(ExecuteCreateNewCategory);
         }
 
         #region Load data
@@ -187,6 +186,23 @@ namespace WPF_Project.ViewModels
             }
         }
 
+        #endregion
+
+        #region Open dialog cateogry
+        private RelayCommand createNewCategory;
+
+        public RelayCommand CreateNewCategory
+        {
+            get { return createNewCategory; }
+            set { createNewCategory = value; }
+        }
+
+        public void ExecuteCreateNewCategory()
+        {
+            DialogCategorys dialogCategorys = new DialogCategorys();
+            dialogCategorys.DataContext = new DialogCategoryViewModel(dialogCategorys, this);
+            dialogCategorys.ShowDialog();   
+        }
         #endregion
     }
 }

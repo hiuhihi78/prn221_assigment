@@ -12,14 +12,14 @@
         FontSize="15"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="WhiteSmoke" Width="657" Height="544"
+        Background="WhiteSmoke" Width="657" Height="570"
         >
     <Canvas>
         <TextBlock
             Text="Product's info"
             FontSize="30"
             FontWeight="Bold" HorizontalAlignment="Left" 
-            Canvas.Left="17" VerticalAlignment="Top" Canvas.Top="27"
+            Canvas.Left="24" VerticalAlignment="Top" Canvas.Top="10"
             />
         <TextBox
             materialDesign:HintAssist.Hint="Product Name"
@@ -33,22 +33,32 @@
 
         <ComboBox
             materialDesign:HintAssist.Hint="Category"
-            Width="329"
+            Width="259"
             Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="166" Canvas.Top="135" HorizontalAlignment="Left" VerticalAlignment="Center"
-            IsEnabled="{Binding IsEnableItem}" 
             ItemsSource="{Binding Categorys}" 
             DisplayMemberPath="Name" 
             SelectedValuePath="Id" 
-            SelectedItem="{Binding Product.CategoryId,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
             SelectedValue="{Binding Product.CategoryId,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+            IsEnabled="{Binding IsEnableItem}"
+            
             />
+
+        <Button
+            Background="{DynamicResource MaterialDesignTextFieldBoxBackground}"
+            Style="{StaticResource MaterialDesignIconButton}"
+            ToolTip="Create new category" 
+            Command="{Binding CreateNewCategory}"
+            Canvas.Left="442" Canvas.Top="137">
+            <materialDesign:PackIcon Kind="Plus" />
+        </Button>
+
         <TextBox
             materialDesign:HintAssist.Hint="Quantity"
             AcceptsReturn="True"
             Style="{StaticResource MaterialDesignFilledTextBox}"
             TextWrapping="Wrap" Canvas.Left="165" Canvas.Top="198" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
             Text="{Binding Product.Quantity, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-            IsEnabled="{Binding AllowEnableQuantityField}"
+            IsEnabled="False"
             />
         <TextBox
             materialDesign:HintAssist.Hint="Price"
