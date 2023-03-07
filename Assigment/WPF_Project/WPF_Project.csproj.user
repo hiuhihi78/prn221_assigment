@@ -13,6 +13,9 @@
     <Compile Update="Views\CheckoutOrder.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogProducts.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DialogSuppliers.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -23,6 +26,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Order.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\ProductManagement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -36,6 +42,9 @@
     <Page Update="Views\CheckoutOrder.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\DialogProducts.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\DialogSuppliers.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -46,6 +55,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Order.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\ProductManagement.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

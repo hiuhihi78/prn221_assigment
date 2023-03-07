@@ -82,11 +82,11 @@
                                 Kind="GiftOutline" />
                             <TextBlock
                                 HorizontalAlignment="Center"
-                                Text="Import" />
+                                Text="Product" />
                         </StackPanel>
                     </TabItem.Header>
                     <TabItem.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickImportCommand}"/>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickProductCommand}"/>
                     </TabItem.InputBindings>
                 </TabItem>
 

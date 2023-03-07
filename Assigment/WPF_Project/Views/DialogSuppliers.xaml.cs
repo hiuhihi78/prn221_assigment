@@ -21,12 +21,6 @@ namespace WPF_Project.Views
     /// </summary>
     public partial class DialogSuppliers : Window
     {
-        public DialogSuppliers(DialogSuppliers dialogSuppliers, object viewModelParentScreen)
-        {
-            DataContext = new DialogSuppierViewModel(dialogSuppliers, viewModelParentScreen);
-            InitializeComponent();
-        }
-
         public DialogSuppliers()
         {
             InitializeComponent();

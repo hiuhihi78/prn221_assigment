@@ -33,6 +33,7 @@ namespace WPF_Project.ViewModels
         {
             clickOrderCommand = new RelayCommand(HandleOpenOrderScreen);
             clickImportCommand = new RelayCommand(HandleOpenImportScreen);
+            clickProductCommand = new RelayCommand(HandleOpenProductScreen);
         }
 
 
@@ -67,6 +68,24 @@ namespace WPF_Project.ViewModels
         public void HandleOpenImportScreen()
         {
             NavigationFrameContentHomeScreen.NavigateTo(new Import());
+        }
+
+        #endregion
+
+
+        #region handle click tabItem Product management
+
+        private RelayCommand clickProductCommand;
+
+        public RelayCommand ClickProductCommand
+        {
+            get { return clickProductCommand; }
+            set { clickProductCommand = value; OnPropertyChanged(); }
+        }
+
+        public void HandleOpenProductScreen()
+        {
+            NavigationFrameContentHomeScreen.NavigateTo(new ProductManagement());
         }
 
         #endregion

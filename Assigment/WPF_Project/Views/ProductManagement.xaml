@@ -1,0 +1,117 @@
+﻿<Page x:Class="WPF_Project.Views.ProductManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Views"
+      mc:Ignorable="d" 
+      
+      Title="ProductManagement"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
+      d:DesignHeight="650" d:DesignWidth="1100"
+      FontSize="15"
+      >
+    <Page.DataContext>
+        <viewmodels:ProductManagementViewModel/>
+    </Page.DataContext>
+
+    <Canvas>
+        <TextBlock
+            Text="Products"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Left" 
+            Canvas.Left="17" VerticalAlignment="Top" Canvas.Top="27"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Product's name"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="107" Canvas.Top="84" HorizontalAlignment="Left" VerticalAlignment="Center" Width="395" RenderTransformOrigin="0.501,0.559"
+            Text="{Binding SearchProductName ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            />
+        <ComboBox
+            materialDesign:HintAssist.Hint="Product's category"
+            x:Name="cboCategory"
+            Width="280"
+            IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+            Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="107" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Center"
+            
+            ItemsSource="{Binding Categorys}" 
+            DisplayMemberPath="Name" 
+            SelectedValuePath="Id" 
+            SelectedValue="{Binding SelectedCategory}"
+            />
+
+        <Button
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Content="Create new product"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Canvas.Left="107" Canvas.Top="247" HorizontalAlignment="Center" VerticalAlignment="Top" 
+            Background="#00cc95"
+            IsEnabled="{Binding IsAdmin}"
+            Command="{Binding CreateNewProduct}"
+            />
+
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding Products}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="298" Canvas.Left="108" Canvas.Top="290" HorizontalAlignment="Center" VerticalAlignment="Top" Width="884"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn   Width="30"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="220"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" />
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Price}" Width="130" />
+
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="150"/>
+
+                <DataGridTemplateColumn Header="" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.UpdateProduct, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                Background="#76b5c5"
+                                ToolTip="Update"
+                                IsEnabled="{Binding IsAdmin}"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Update" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.ViewProduct, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                Background="#1e81b0"
+                                ToolTip="View"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Eye" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+    </Canvas>
+</Page>
