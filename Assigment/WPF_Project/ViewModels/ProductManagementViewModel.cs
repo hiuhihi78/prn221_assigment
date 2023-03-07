@@ -198,5 +198,14 @@ namespace WPF_Project.ViewModels
         }
 
         #endregion
+
+
+        
+        #region Set default selectedCategory
+        public void SetDefaultSelectedCategory()
+        {
+            SelectedCategory = 0;
+        }
+        #endregion
     }
 }

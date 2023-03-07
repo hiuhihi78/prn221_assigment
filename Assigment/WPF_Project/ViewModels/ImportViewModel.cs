@@ -175,10 +175,6 @@ namespace WPF_Project.ViewModels
                 {
 
                 }
-                else if (product.Quantity == 0)
-                {
-
-                }
                 else
                 {
                     product.Quantity = 1;

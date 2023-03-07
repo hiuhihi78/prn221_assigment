@@ -181,6 +181,7 @@ namespace WPF_Project.ViewModels
 
                     ((ProductManagementViewModel)_viewModelParentScreen).LoadAllProducts();
                     ((ProductManagementViewModel)_viewModelParentScreen).LoadAllCategorys();
+                    ((ProductManagementViewModel)_viewModelParentScreen).SetDefaultSelectedCategory();
                     _dialogProductts.Close();
                 }
             }
@@ -202,6 +203,16 @@ namespace WPF_Project.ViewModels
             DialogCategorys dialogCategorys = new DialogCategorys();
             dialogCategorys.DataContext = new DialogCategoryViewModel(dialogCategorys, this);
             dialogCategorys.ShowDialog();   
+        }
+        #endregion
+
+        #region Set default category
+        public void SetDefaultCategory()
+        {
+            if(_productInfo!= null) 
+            {
+                Product.CategoryId = 1;
+            }
         }
         #endregion
     }

@@ -71,6 +71,7 @@ namespace WPF_Project.ViewModels
                 categoryService.CreateCategory(category);
                 MessageBox.Show("Success!", "Alter", MessageBoxButton.OK, MessageBoxImage.Information);
                 ((DialogProductsViewModel)_viewModelParentScreen).LoadAllCategorys();
+                ((DialogProductsViewModel)_viewModelParentScreen).SetDefaultCategory();
                 _dialogCategorys.Close();
             }
         }

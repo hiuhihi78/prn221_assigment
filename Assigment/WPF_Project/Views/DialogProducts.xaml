@@ -128,7 +128,7 @@
             Background="#0077d0"
             FontSize="40" Click="Button_Click" 
             ToolTip="Back"
-            
+            IsEnabled="{Binding IsEnableItem}"
             >
             <Button.Content>
                 <materialDesign:PackIcon 

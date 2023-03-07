@@ -7,8 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="700" d:DesignWidth="1200"
              
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            >
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
+             Loaded="Page_Loaded"
+      >
+    <Page.DataContext>
+        <viewmodels:HomeViewModel/>
+    </Page.DataContext>
     <materialDesign:Card>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -90,6 +94,49 @@
                     </TabItem.InputBindings>
                 </TabItem>
 
+
+                <TabItem Name="AccoutManageTab">
+                    <TabItem.Header>
+                        <StackPanel
+                            Width="auto"
+                            Height="auto">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="CardAccountDetailsOutline" />
+                            <TextBlock
+                                Text="Account Manage" Height="29" 
+                                TextWrapping="Wrap" Width="60"
+                                FontSize="10"
+                                TextAlignment="Center"
+                                />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickAccountManageCommand}"/>
+                    </TabItem.InputBindings>
+                </TabItem>
+
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel
+                            Width="auto"
+                            Height="auto">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="Logout" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="Logout" />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickLogoutCommand}"/>
+                    </TabItem.InputBindings>
+                </TabItem>
 
             </TabControl>
             <Frame Name="MainFrame" Grid.Column="1" Source="Order.xaml"/>

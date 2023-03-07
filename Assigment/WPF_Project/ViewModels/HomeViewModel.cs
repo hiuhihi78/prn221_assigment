@@ -9,6 +9,8 @@ using System.Windows.Controls;
 using WPF_Project.Views;
 using WPF_Project.Command;
 using WPF_Project.Navigation;
+using WPF_Project.Models;
+using System.Windows;
 
 namespace WPF_Project.ViewModels
 {
@@ -20,10 +22,9 @@ namespace WPF_Project.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        
+
 
         #region Declare varible
-
 
 
         #endregion
@@ -34,6 +35,8 @@ namespace WPF_Project.ViewModels
             clickOrderCommand = new RelayCommand(HandleOpenOrderScreen);
             clickImportCommand = new RelayCommand(HandleOpenImportScreen);
             clickProductCommand = new RelayCommand(HandleOpenProductScreen);
+            clickAccountManageCommand = new RelayCommand(HandleOpenAccountManageScreen);
+            clickLogoutCommand = new RelayCommand(HandleLogout);
         }
 
 
@@ -49,7 +52,7 @@ namespace WPF_Project.ViewModels
 
         public void HandleOpenOrderScreen()
         {
-            NavigationFrameContentHomeScreen.NavigateTo(new Order());
+            NavigationFrameContentHomeScreen.NavigateTo(new Views.Order());
         }
 
         #endregion
@@ -67,11 +70,10 @@ namespace WPF_Project.ViewModels
 
         public void HandleOpenImportScreen()
         {
-            NavigationFrameContentHomeScreen.NavigateTo(new Import());
+            NavigationFrameContentHomeScreen.NavigateTo(new Views.Import());
         }
 
         #endregion
-
 
         #region handle click tabItem Product management
 
@@ -85,11 +87,49 @@ namespace WPF_Project.ViewModels
 
         public void HandleOpenProductScreen()
         {
-            NavigationFrameContentHomeScreen.NavigateTo(new ProductManagement());
+            NavigationFrameContentHomeScreen.NavigateTo(new Views.ProductManagement());
         }
 
         #endregion
 
+        #region handle click tabItem Product management
+
+        private RelayCommand clickAccountManageCommand;
+
+        public RelayCommand ClickAccountManageCommand
+        {
+            get { return clickAccountManageCommand; }
+            set { clickAccountManageCommand = value; OnPropertyChanged(); }
+        }
+
+        public void HandleOpenAccountManageScreen()
+        {
+            NavigationFrameContentHomeScreen.NavigateTo(new Views.AccountManagement());
+        }
+
+        #endregion
+
+        #region Logout
+        private RelayCommand clickLogoutCommand;
+
+        public RelayCommand ClickLogoutCommand
+        {
+            get { return clickLogoutCommand; }
+            set { clickLogoutCommand = value; }
+        }
+
+        public void HandleLogout()
+        {
+            MessageBoxResult result = MessageBox.Show("Are you sure you want to log out?", "Log Out", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (result == MessageBoxResult.Yes)
+            {
+                Navigation.NavigationParameters.Parameters.Remove("currentUser");
+                Navigation.NavigationService.NavigateTo(new Login());
+            }
+        }
+
+        #endregion
 
     }
 }
