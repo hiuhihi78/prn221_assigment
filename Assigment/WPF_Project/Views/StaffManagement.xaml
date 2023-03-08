@@ -1,0 +1,146 @@
+﻿<Page x:Class="WPF_Project.Views.StaffManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Views"
+      mc:Ignorable="d" 
+      xmlns:ValidationRule="clr-namespace:WPF_Project.Validation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="650" d:DesignWidth="1100"
+      FontSize="15"
+      
+      xmlns:converter="clr-namespace:WPF_Project.Converter"
+      xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels">
+    <Page.DataContext>
+        <viewmodels:StaffManagementViewModel/>
+    </Page.DataContext>
+
+    <Page.Resources>
+        <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+    </Page.Resources>
+    <Canvas>
+        <TextBlock
+            Text="Staff management"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Left" 
+            Canvas.Left="71" VerticalAlignment="Center" Canvas.Top="27"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Staff's info"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="107" Canvas.Top="92" HorizontalAlignment="Center" VerticalAlignment="Top" Width="395" RenderTransformOrigin="0.501,0.559"
+            Text="{Binding SearchStaff ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            />
+
+        <ComboBox
+            materialDesign:HintAssist.Hint="Staff's Role"
+            Width="280"
+            Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="107" Canvas.Top="159" HorizontalAlignment="Center" VerticalAlignment="Top"
+            
+            ItemsSource="{Binding Roles}" 
+            DisplayMemberPath="Name" 
+            SelectedValuePath="Id" 
+            SelectedValue="{Binding SelectedRole, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            />
+
+        <Button
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Content="Create new staff's account"
+            Canvas.Left="107" Canvas.Top="247" HorizontalAlignment="Center" VerticalAlignment="Top" 
+            Background="#00cc95"
+            Command="{Binding CreateNewStaff}"
+            />
+
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding Staffs}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="298" Canvas.Left="71" Canvas.Top="301" HorizontalAlignment="Left" VerticalAlignment="Center" Width="975"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" Width="50"/>
+                <DataGridTextColumn Header="Username" Binding="{Binding Username}" Width="150" />
+                <DataGridTextColumn Header="Fullname" Binding="{Binding Fullname}" Width="150" />
+
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="120"/>
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="150"/>
+                <DataGridTextColumn Header="Role" Binding="{Binding RoleNavigation.Name}" Width="100"/>
+
+                <DataGridTemplateColumn Header="Status" Width="150">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button
+                                    Command="{Binding DataContext.ChangeStaffStatus, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                    <Button.Resources>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Status}" Value="true">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Background" Value="Green"/>
+                                                    <Setter Property="Width" Value="80"/>
+                                                    <Setter Property="Height" Value="35"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                    <Setter Property="BorderThickness" Value="1"/>
+                                                </DataTrigger>
+                                                
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Content>
+                                        <TextBlock>Activate</TextBlock>
+                                    </Button.Content>
+                                </Button>
+                                <Button
+                                    Command="{Binding DataContext.ChangeStaffStatus, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    CommandParameter="{Binding}"
+                                    >
+                                    
+                                    <Button.Resources>
+                                        <Style TargetType="Button">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding Status}" Value="false">
+                                                    <Setter Property="Visibility" Value="Visible"/>
+                                                    <Setter Property="Background" Value="Red"/>
+                                                    <Setter Property="Width" Value="80"/>
+                                                    <Setter Property="Height" Value="35"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                                                    <Setter Property="VerticalContentAlignment" Value="Center"/>
+                                                    <Setter Property="BorderThickness" Value="1"/>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                            
+                                        </Style>
+                                    </Button.Resources>
+                                    <Button.Content>
+                                        <TextBlock>DeActivate</TextBlock>
+                                    </Button.Content>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+    </Canvas>
+</Page>

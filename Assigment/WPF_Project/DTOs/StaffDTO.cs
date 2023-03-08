@@ -91,5 +91,32 @@ namespace WPF_Project.DTOs
             set { orders = value; OnPropertyChanged(); }
         }
 
+
+        private Role roleNavigation;
+
+        public Role RoleNavigation
+        {
+            get { return roleNavigation; }
+            set { roleNavigation = value; OnPropertyChanged(); }
+        }
+
+
+        public static StaffDTO FromStaff(Staff staff)
+        {
+            return new StaffDTO()
+            {
+                address = staff.Address,
+                RoleNavigation = staff.RoleNavigation,
+                fullname = staff.Fullname,
+                imports = staff.Imports,
+                orders = staff.Orders,
+                status = staff.Status,
+                password = staff.Password,
+                phone = staff.Phone,
+                username = staff.Username,
+                id = staff.Id
+            };
+        }
+
     }
 }

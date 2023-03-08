@@ -95,6 +95,30 @@
                 </TabItem>
 
 
+                <TabItem>
+                    <TabItem.Header>
+                        <StackPanel
+                            Width="auto"
+                            Height="auto">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="ClipboardTextClockOutline" />
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                Text="History Order"
+                                TextWrapping="Wrap"
+                                FontSize="12"
+                                TextAlignment="Center"/>
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickHistoryOrderCommand}"/>
+                    </TabItem.InputBindings>
+                </TabItem>
+
+
                 <TabItem Name="AccoutManageTab">
                     <TabItem.Header>
                         <StackPanel

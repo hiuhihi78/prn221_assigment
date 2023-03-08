@@ -1,0 +1,92 @@
+﻿<Page x:Class="WPF_Project.Views.HistoryOrder"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Views"
+      mc:Ignorable="d" 
+      Title="HistoryOrder"
+      
+      xmlns:ValidationRule="clr-namespace:WPF_Project.Validation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="650" d:DesignWidth="1100"
+      FontSize="15"
+      
+      xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels">
+    <Page.DataContext>
+        <viewmodels:OrderHistoryViewModel/>
+    </Page.DataContext>
+
+    <Canvas>
+        <TextBlock
+            Text="ORDER HISTORY"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Center" Canvas.Left="35" VerticalAlignment="Top" Canvas.Top="10"
+            />
+        <TextBox
+            materialDesign:HintAssist.Hint="Order'Info"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="111" Canvas.Top="67" HorizontalAlignment="Left" VerticalAlignment="Center" Width="395" RenderTransformOrigin="0.501,0.559"
+            Text="{Binding SearchOrderInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            />
+
+        <DatePicker
+            Width="140"
+            materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+            materialDesign:HintAssist.FloatingOffset="0,-22"
+            materialDesign:HintAssist.Hint="Start date"
+            Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+            Canvas.Left="109" Canvas.Top="129" 
+            SelectedDate="{Binding StartDate, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+            DisplayDateEnd="{Binding EndDate}" HorizontalAlignment="Left"
+            />
+
+        <DatePicker
+            Width="140"
+            materialDesign:DatePickerAssist.OutlinedBorderInactiveThickness="2"
+            materialDesign:HintAssist.FloatingOffset="0,-22"
+            materialDesign:HintAssist.Hint="End date"
+            Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
+            Canvas.Left="274" Canvas.Top="129" HorizontalAlignment="Left" 
+            SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            DisplayDateEnd="{Binding CurrentDate}"
+            />
+
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding Orders}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="301" Canvas.Left="118" Canvas.Top="230" HorizontalAlignment="Left" VerticalAlignment="Center" Width="882"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Customer name" Binding="{Binding CustomerName}" Width="180"/>
+                <DataGridTextColumn Header="Customer Address" Binding="{Binding CustomerAddress}" Width="180" />
+                <DataGridTextColumn Header="Customer Phone" Binding="{Binding CustomerPhone}" Width="150"/>
+                <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}" Width="150"/>
+                <DataGridTemplateColumn Header="" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.AddToCart, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                ToolTip="View detail"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Eye" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Canvas>
+</Page>

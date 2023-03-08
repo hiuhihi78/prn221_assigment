@@ -103,10 +103,6 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-
-
-                
-
                 <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
                 <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
                 <DataGridTemplateColumn Header="Actions" Width="80">

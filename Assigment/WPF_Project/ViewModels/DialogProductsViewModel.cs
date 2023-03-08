@@ -35,15 +35,6 @@ namespace WPF_Project.ViewModels
             set { product = value; OnPropertyChanged(); }
         }
 
-        private string name;
-
-        public string Name
-        {
-            get { return name; }
-            set { name = value; OnPropertyChanged(); }
-        }
-
-
         private ObservableCollection<CategoryDTO> categorys;
 
         public ObservableCollection<CategoryDTO> Categorys

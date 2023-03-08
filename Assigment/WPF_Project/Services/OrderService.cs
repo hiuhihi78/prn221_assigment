@@ -69,7 +69,44 @@ namespace WPF_Project.Services
                 return false;
             }
         }
-        
-        
+
+        public ObservableCollection<Models.Order> GetOrdersByCondition(string searchOrderInfo, DateTime? startDate, DateTime? endDate)
+        {
+            ObservableCollection<Models.Order> result = new ObservableCollection<Order>();
+            List<Order> orders = new List<Order>(); 
+            if(startDate == null)
+            {
+                orders = context.Orders
+                                .Where(p =>   
+                                       p.OrderDate <= endDate &&
+                                       (
+                                       p.CustomerAddress.Contains(searchOrderInfo)) ||
+                                       p.CustomerName.Contains(searchOrderInfo) ||
+                                       p.CustomerPhone.Contains(searchOrderInfo) ||
+                                       p.TotalAmount.ToString().Contains(searchOrderInfo)
+                                       )
+                                .ToList();
+            }
+            else
+            {
+                orders = context.Orders
+                                .Where(p =>
+                                       (p.OrderDate >= startDate &&
+                                       p.OrderDate <= endDate) ||
+                                       p.CustomerAddress.Contains(searchOrderInfo) ||
+                                       p.CustomerName.Contains(searchOrderInfo) ||
+                                       p.CustomerPhone.Contains(searchOrderInfo) ||
+                                       p.TotalAmount.ToString().Contains(searchOrderInfo)
+                                       )
+                                .ToList();
+            }
+             
+            foreach (var item in orders)
+            {
+                result.Add(item);
+            }
+            return result;
+
+        }
     }
 }
