@@ -1,0 +1,105 @@
+﻿<Page x:Class="WPF_Project.Views.SupplierManagement"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF_Project.Views"
+      mc:Ignorable="d" 
+      
+      
+       xmlns:ValidationRule="clr-namespace:WPF_Project.Validation"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      d:DesignHeight="650" d:DesignWidth="1100"
+      FontSize="15"
+      
+      xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
+      
+      >
+    <Page.DataContext>
+        <viewmodels:SuppliermanagementViewModel/>
+    </Page.DataContext>
+    <Canvas>
+        <TextBlock
+            Text="Suppliers"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Center" 
+            Canvas.Left="45" VerticalAlignment="Top" Canvas.Top="28"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Supplier's Info"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
+            MaxLength="40"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="45" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top" Width="395" RenderTransformOrigin="0.501,0.559"
+            Text="{Binding SearchSupplier ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            />
+
+        <Button
+            materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+            materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+            materialDesign:ButtonProgressAssist.Value="-1"
+            Content="Create new product"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            Canvas.Left="45" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Background="#00cc95"
+            Command="{Binding CreateNewSupplier}"
+            />
+
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding Suppliers}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="298" Canvas.Left="45" Canvas.Top="270" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1010"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn   Width="30"/>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="300"/>
+                <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="200" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="300" />
+
+
+                <DataGridTemplateColumn Header="" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.UpdateSupplier, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                Background="#76b5c5"
+                                ToolTip="Update"
+                                IsEnabled="{Binding IsAdmin}"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Update" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <DataGridTemplateColumn Header="" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.ViewSupplier, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                Background="#1e81b0"
+                                ToolTip="View"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="Eye" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Canvas>
+</Page>

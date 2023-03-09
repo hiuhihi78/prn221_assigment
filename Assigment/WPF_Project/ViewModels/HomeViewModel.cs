@@ -39,6 +39,7 @@ namespace WPF_Project.ViewModels
             clickLogoutCommand = new RelayCommand(HandleLogout);
             clickHistoryOrderCommand = new RelayCommand(HandleOpenHistoryOrderScreen);
             clickHistoryImportCommand = new RelayCommand(HandleOpenHistoryImportScreen);
+            clickSupplierManageCommand = new RelayCommand(HandleOpenSupplierManageScreen);
         }
 
 
@@ -169,5 +170,25 @@ namespace WPF_Project.ViewModels
         #endregion
 
 
+        #region handle ClickSupplierManageCommand
+
+        private RelayCommand clickSupplierManageCommand;
+
+        public RelayCommand ClickSupplierManageCommand
+        {
+            get { return clickSupplierManageCommand; }
+            set { clickSupplierManageCommand = value; OnPropertyChanged(); }
+        }
+
+        public void HandleOpenSupplierManageScreen()
+        {
+            NavigationFrameContentHomeScreen.NavigateTo(new Views.SupplierManagement());
+        }
+
+        #endregion
+
+
+
+        
     }
 }

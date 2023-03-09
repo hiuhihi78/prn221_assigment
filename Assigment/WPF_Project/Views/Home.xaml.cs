@@ -32,15 +32,18 @@ namespace WPF_Project.Views
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
-            var tab = (TabItem)this.FindName("AccoutManageTab");
+            var tabAccount = (TabItem)this.FindName("AccoutManageTab");
+            var tabSupplier = (TabItem)this.FindName("AccoutManageTab");
             var currentUserIsAdmin = ((Staff)Navigation.NavigationParameters.Parameters["currentUser"]).Role == 1;
             if(currentUserIsAdmin) 
             {
-                tab.Visibility= Visibility.Visible;
+                tabAccount.Visibility= Visibility.Visible;
+                tabSupplier.Visibility = Visibility.Visible;
             }
             else
             {
-                tab.Visibility= Visibility.Hidden;
+                tabAccount.Visibility= Visibility.Hidden;
+                tabSupplier.Visibility = Visibility.Hidden;
             }
         }
     }

@@ -49,7 +49,7 @@ namespace WPF_Project.Services
             }
             else
             {
-                suppliers = context.Suppliers.Where(x => x.Name.Contains(nameOrPhone) || x.Phone.Contains(nameOrPhone)).ToList();
+                suppliers = context.Suppliers.Where(x => x.Name.Contains(nameOrPhone) || x.Phone.Contains(nameOrPhone) || x.Address.Contains(nameOrPhone)).ToList();
             }
             var result = new ObservableCollection<SupplierDTO>();
             foreach (var item in suppliers)
@@ -63,6 +63,37 @@ namespace WPF_Project.Services
         internal Supplier? GetSupplierById(int supplierId)
         {
             return context.Suppliers.FirstOrDefault(x => x.Id== supplierId);
+        }
+
+        public bool SupplierPhoneExisted(string phone)
+        {
+            return context.Suppliers.Any(x => x.Phone == phone);  
+        }
+
+        public void AddSupplier(SupplierDTO supplier)
+        {
+            var result = new Supplier()
+            {
+                Name= supplier.Name,
+                Phone= supplier.Phone,
+                Address= supplier.Address,  
+            };
+
+            context.Suppliers.Add(result);
+            context.SaveChanges();
+        }
+
+
+        public void UpdateSupplier(SupplierDTO supplier)
+        {
+            var supplierEdit = context.Suppliers.FirstOrDefault(x => x.Id == supplier.Id);  
+            if (supplierEdit != null) 
+            {
+                supplierEdit.Name = supplier.Name;  
+                supplierEdit.Phone = supplier.Phone;
+                supplierEdit.Address = supplier.Address;
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -141,6 +141,30 @@
                     </TabItem.InputBindings>
                 </TabItem>
 
+                <TabItem Name="SupplierManageTab">
+                    <TabItem.Header>
+                        <StackPanel
+                            Width="auto"
+                            Height="auto">
+                            <materialDesign:PackIcon
+                                Width="24"
+                                Height="24"
+                                HorizontalAlignment="Center"
+                                Kind="HumanDolly" />
+                            <TextBlock
+                                Text="Supplier Manage" Height="29" 
+                                TextWrapping="Wrap" Width="60"
+                                FontSize="10"
+                                TextAlignment="Center"
+                                />
+                        </StackPanel>
+                    </TabItem.Header>
+                    <TabItem.InputBindings>
+                        <MouseBinding MouseAction="LeftClick" Command="{Binding ClickSupplierManageCommand}"/>
+                    </TabItem.InputBindings>
+                </TabItem>
+
+
 
                 <TabItem Name="AccoutManageTab">
                     <TabItem.Header>

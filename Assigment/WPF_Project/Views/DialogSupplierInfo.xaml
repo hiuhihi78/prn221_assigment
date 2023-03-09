@@ -1,0 +1,97 @@
+﻿<Window x:Class="WPF_Project.Views.DialogSupplierInfo"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Project.Views"
+        mc:Ignorable="d"
+        
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
+        FontSize="15"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="WhiteSmoke" Width="489" Height="499"
+        >
+    <Canvas>
+        <TextBlock
+            Text="Supplier's info"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Left" 
+            Canvas.Left="24" VerticalAlignment="Top" Canvas.Top="10"
+            />
+        <TextBox
+            materialDesign:HintAssist.Hint="Supplier Name"
+            materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
+            MaxLength="30"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="123" HorizontalAlignment="Center" Width="330" VerticalAlignment="Top" 
+            Text="{Binding Supplier.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+            IsEnabled="{Binding CanEdit}"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Supplier Phone"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="202" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
+            Text="{Binding Supplier.Phone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+            IsEnabled="{Binding CanEdit}"
+            MaxLength="10"
+            PreviewTextInput="TextBox_PreviewTextInput"
+            />
+        <TextBox
+            materialDesign:HintAssist.Hint="Supplier Address"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="285" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
+            Text="{Binding Supplier.Address, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+            IsEnabled="{Binding CanEdit}"
+            />
+
+        <Button
+            Canvas.Left="162" Canvas.Top="391" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Width="106" Height="68"
+            Background="#49be25"
+            FontSize="40"
+            ToolTip="Save"
+            Command="{Binding SaveCommand}"
+            >
+            <Button.Resources>
+                <Style TargetType="Button">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding CanEdit}" Value="False">
+                            <Setter Property="Visibility" Value="Collapsed"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Resources>
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="CheckCircleOutline" HorizontalAlignment="Center" />
+            </Button.Content>
+        </Button>
+
+        <Button
+            Canvas.Left="292" Canvas.Top="391" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Width="107" Height="68"
+            Background="#0077d0"
+            FontSize="40" Click="Button_Click" 
+            ToolTip="Back"
+            
+            >
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="KeyboardReturn" />
+            </Button.Content>
+        </Button>
+    </Canvas>
+</Window>

@@ -31,6 +31,9 @@
     <Compile Update="Views\DialogStaffs.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogSupplierInfo.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DialogSuppliers.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -53,6 +56,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\StaffManagement.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\SupplierManagement.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -84,6 +90,9 @@
     <Page Update="Views\DialogStaffs.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\DialogSupplierInfo.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\DialogSuppliers.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -106,6 +115,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\StaffManagement.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\SupplierManagement.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
