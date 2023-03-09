@@ -1,0 +1,170 @@
+﻿<Window x:Class="WPF_Project.Views.ChooseProductImport"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WPF_Project.Views"
+        mc:Ignorable="d"
+        
+        
+         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
+        FontSize="15"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        Background="WhiteSmoke" Width="953" Height="633"
+        >
+    <Canvas>
+        <TextBlock
+            Text="Product's info"
+            FontSize="30"
+            FontWeight="Bold" HorizontalAlignment="Left" 
+            Canvas.Left="24" VerticalAlignment="Top" Canvas.Top="10"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Search Product"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="33" Canvas.Top="69" HorizontalAlignment="Left" VerticalAlignment="Center" Width="300" 
+            Text="{Binding SearchProduct, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="58"
+            />
+
+
+        <DataGrid
+            Name="gridProducts"
+            CanUserAddRows="False"
+            ItemsSource="{Binding ListProduct}"
+            SelectionMode="Extended"
+            SelectionUnit="Cell" 
+            AutoGenerateColumns="False"
+            IsReadOnly="True"
+            ScrollViewer.CanContentScroll="True" 
+            Height="301" Canvas.Left="27" Canvas.Top="144" HorizontalAlignment="Left" VerticalAlignment="Top" Width="542"
+            >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="160"/>
+                <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="120" />
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="150" />
+
+                <DataGridTemplateColumn Header="" Width="80">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button
+                                Command="{Binding DataContext.ChooseProductCommand, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                CommandParameter="{Binding}"
+                                Background="#696eb3"
+                                >
+                                <Button.Content>
+                                    <materialDesign:PackIcon Kind="PlusThick" />
+                                </Button.Content>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Product"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="596" Canvas.Top="150" HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" 
+            Text="{Binding Product.Name, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="58"
+             IsEnabled="False"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Quantity"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="596" Canvas.Top="217" HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" 
+            Text="{Binding Product.Quantity, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="58"
+            PreviewTextInput="DoubleUpDown_PreviewTextInput"
+            />
+
+        <TextBox
+            materialDesign:HintAssist.Hint="Price"
+            AcceptsReturn="True"
+            Style="{StaticResource MaterialDesignFilledTextBox}"
+            TextWrapping="Wrap" Canvas.Left="596" Canvas.Top="287" HorizontalAlignment="Center" VerticalAlignment="Top" Width="300" 
+            Text="{Binding Product.Price, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" Height="58"
+            PreviewTextInput="DoubleUpDown_PreviewTextInput"
+            />
+
+        <TextBlock
+            TextWrapping="Wrap" Canvas.Left="604" Canvas.Top="367"
+            HorizontalAlignment="Center" VerticalAlignment="Top" Width="106" Height="42" 
+            Text="Discount"
+            FontSize="17"
+           />
+
+        <toolkit:DoubleUpDown 
+            materialDesign:HintAssist.Hint="Discount"
+            Width="166"
+            Canvas.Left="730" Canvas.Top="356" 
+            HorizontalAlignment="Center" Height="52" VerticalAlignment="Top"
+            Background="#e5e3e8"
+            Maximum="100"
+            Minimum="0"
+            Text="{Binding Product.Discount,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+            PreviewTextInput="DoubleUpDown_PreviewTextInput"
+            IsEnabled="{Binding IsEnableItem}"
+            >
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="ValueChanged">
+
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </toolkit:DoubleUpDown>
+
+        <Label Content="Total:" 
+               FontSize="24"
+               Canvas.Left="596" Canvas.Top="419"
+               HorizontalAlignment="Center" VerticalAlignment="Top"/>
+        <TextBlock
+            Text="{Binding Total}"
+            Width="194" Canvas.Left="730" Canvas.Top="423"
+            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Top"
+            />
+
+
+        <Button
+            Canvas.Left="625" Canvas.Top="523" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Width="106" Height="68"
+            Background="#49be25"
+            FontSize="40"
+            ToolTip="Save"
+            Command="{Binding SaveCommand}"
+            >
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="CheckCircleOutline" HorizontalAlignment="Center" />
+            </Button.Content>
+        </Button>
+
+        <Button
+            Canvas.Left="772" Canvas.Top="523" 
+            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Width="106" Height="68"
+            Background="#0077d0"
+            FontSize="40" Click="Button_Click" 
+            ToolTip="Back"
+            
+            >
+            <Button.Content>
+                <materialDesign:PackIcon 
+                    Width="40"
+                    Height="40"
+                    Kind="KeyboardReturn" VerticalAlignment="Center" />
+            </Button.Content>
+        </Button>
+
+    </Canvas>
+</Window>

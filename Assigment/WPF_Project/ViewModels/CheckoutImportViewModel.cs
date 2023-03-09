@@ -104,7 +104,17 @@ namespace WPF_Project.ViewModels
 
         public void HandleBackToPreviousScreen()
         {
+            if (!NavigationParameters.Parameters.ContainsKey("listImportedCopy"))
+            {
+                NavigationParameters.Parameters.Add("listImportedCopy", ListOrderProduct);
+            }
+            else
+            {
+                NavigationParameters.Parameters.Remove("listImportedCopy");
+                NavigationParameters.Parameters.Add("listImportedCopy", ListOrderProduct);
+            }
             NavigationFrameContentHomeScreen.NavigateTo(new Import());
+            
         }
 
         #endregion

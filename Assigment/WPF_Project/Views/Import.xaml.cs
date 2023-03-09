@@ -25,7 +25,6 @@ namespace WPF_Project.Views
         public Import()
         {
             InitializeComponent();
-            DataContext = new ImportViewModel();
         }
 
         private void DoubleUpDown_PreviewTextInput(object sender, TextCompositionEventArgs e)

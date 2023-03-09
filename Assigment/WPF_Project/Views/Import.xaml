@@ -14,13 +14,13 @@
       FontSize="15"
       
       xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-      >
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels">
+    <Page.DataContext>
+        <viewmodels:ImportViewModel/>
+    </Page.DataContext>
 
 
     <Canvas>
-
-
 
         <TextBlock
             Text="IMPORT"
@@ -35,124 +35,45 @@
             MaxLength="40"
             Style="{StaticResource MaterialDesignFilledTextBox}"
             TextWrapping="Wrap" Canvas.Left="107" Canvas.Top="84" HorizontalAlignment="Left" VerticalAlignment="Center" Width="395" RenderTransformOrigin="0.501,0.559"
-            Text="{Binding SearchProductName}"
-            />
-        <ComboBox
-            materialDesign:HintAssist.Hint="Product's category"
-            x:Name="cboCategory"
-            Width="280"
-            IsEnabled="{Binding Path=IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
-            Style="{StaticResource MaterialDesignFilledComboBox}" Canvas.Left="107" Canvas.Top="149" HorizontalAlignment="Left" VerticalAlignment="Center"
-            
-            ItemsSource="{Binding Categorys}" 
-            DisplayMemberPath="Name" 
-            SelectedValuePath="Id" 
-            SelectedValue="{Binding SelectedCategory}"
+            Text="{Binding SearchProductName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             />
 
         <Button
-            Content="Search"
-            Command="{Binding SearchProduct}"
+            Content="Choose Product Import"
+            Command="{Binding ChooseProductImport}"
             Style="{StaticResource MaterialDesignRaisedLightButton}"
             ToolTip="Resource name: MaterialDesignRaisedLightButton" 
-            Canvas.Left="406" Canvas.Top="156" HorizontalAlignment="Left" 
-            VerticalAlignment="Center" Width="96" Height="45" 
+            Canvas.Left="116" Canvas.Top="156" HorizontalAlignment="Left" 
+            VerticalAlignment="Center" Width="Auto" Height="30" 
             />
-        <TextBlock Text="Create new product" Canvas.Left="20" Canvas.Top="252" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-
-        <TextBlock
-            Text="Products"
-            FontSize="17"
-            FontWeight="DemiBold" HorizontalAlignment="Left" 
-            Canvas.Left="326" VerticalAlignment="Center" Canvas.Top="234"/>
-
-        <TextBlock
-            Text="Cart"
-            FontSize="17"
-            FontWeight="DemiBold" HorizontalAlignment="Center" 
-            Canvas.Left="919" VerticalAlignment="Top" Canvas.Top="245"/>
 
         <DataGrid
             Name="gridProducts"
             CanUserAddRows="False"
-            ItemsSource="{Binding Products}"
+            ItemsSource="{Binding ListImportProduct}"
             SelectionMode="Extended"
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ScrollViewer.CanContentScroll="True" 
-            Height="301" Canvas.Left="20" Canvas.Top="277" HorizontalAlignment="Left" VerticalAlignment="Top" Width="678"
+            Height="301" Canvas.Left="107" Canvas.Top="206" HorizontalAlignment="Left" VerticalAlignment="Center" Width="815"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="180"/>
                 <DataGridTextColumn Header="Quantity" Binding="{Binding Quantity}" Width="100" />
-                <DataGridTemplateColumn Header="Price"  Width="100">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <toolkit:DoubleUpDown 
-                                Value="{Binding Price, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                                Minimum ="0"
-                                PreviewTextInput="DoubleUpDown_PreviewTextInput"
-                             >
-                                <i:Interaction.Triggers>
-                                    <i:EventTrigger EventName="ValueChanged">
-                                        <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}" />
-                                    </i:EventTrigger>
-                                </i:Interaction.Triggers>
-                            </toolkit:DoubleUpDown>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="90"/>
-                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="100"/>
+                <DataGridTextColumn Header="Price" Binding="{Binding Price}" Width="150" />
+                <DataGridTextColumn Header="Discount" Binding="{Binding Discount}" Width="100"/>
+                <DataGridTextColumn Header="Category" Binding="{Binding Category.Name}" Width="150"/>
                 <DataGridTemplateColumn Header="Actions" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
-                                Command="{Binding DataContext.AddToCart, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Command="{Binding DataContext.RemoveProduct, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 CommandParameter="{Binding}"
+                                Background="#de782a"
                                 >
                                 <Button.Content>
-                                    <materialDesign:PackIcon Kind="PlusThick" />
-                                </Button.Content>
-                            </Button>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-            </DataGrid.Columns>
-        </DataGrid>
-        <DataGrid
-            CanUserAddRows="False"
-            ItemsSource="{Binding ListOrderProduct, Mode=TwoWay}"
-            SelectedItem="{Binding SelectedRemoveProduct}"
-            SelectionMode="Extended"
-            SelectionUnit="Cell" 
-            AutoGenerateColumns="False"
-            IsReadOnly="True"
-            HorizontalAlignment="Left" 
-            Canvas.Left="720" 
-            VerticalAlignment="Top"
-            ScrollViewer.CanContentScroll="True" 
-            Height="257" Canvas.Top="282" Width="370"
-            >
-            <DataGrid.Columns>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="160" />
-                <DataGridTemplateColumn Header="Quantity">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Quantity}" Width="80"/>
-                        </DataTemplate>
-                    </DataGridTemplateColumn.CellTemplate>
-                </DataGridTemplateColumn>
-                <DataGridTemplateColumn Header="Actions">
-                    <DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <Button
-                                Command="{Binding DataContext.RemoveProductInCart , RelativeSource={RelativeSource AncestorType=DataGrid}}"
-                                CommandParameter="{Binding}" 
-                                >
-                                <Button.Content>
-                                    <materialDesign:PackIcon Kind="CloseThick" />
+                                    <materialDesign:PackIcon Kind="Close" />
                                 </Button.Content>
                             </Button>
                         </DataTemplate>
@@ -163,18 +84,19 @@
 
         <Label Content="Total:" 
                FontSize="24"
-               Canvas.Left="741" Canvas.Top="538"
-               HorizontalAlignment="Left" VerticalAlignment="Top"/>
+               Canvas.Left="639" Canvas.Top="523"
+               HorizontalAlignment="Left" VerticalAlignment="Center"/>
         <TextBlock
             Text="{Binding TotalPriceOrder}"
-            Width="200" Canvas.Left="831" Canvas.Top="540"
-            FontSize="24" HorizontalAlignment="Center" VerticalAlignment="Top"
+            Width="200" Canvas.Left="729" Canvas.Top="525"
+            FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center"
             />
+
         <Button
-            Command="{Binding CheckoutOrder}"
+            Command="{Binding CheckoutImport}"
             IsEnabled="{Binding EnableButtonCheckout,Mode=TwoWay}"
-            Canvas.Left="895" Canvas.Top="587" 
-            HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Canvas.Left="922" Canvas.Top="574" 
+            HorizontalAlignment="Left" VerticalAlignment="Center" 
             Width="115" Height="53"
             Background="#49be25"
             FontSize="40"
@@ -187,29 +109,6 @@
             </Button.Content>
         </Button>
 
-        <toolkit:DoubleUpDown Canvas.Left="657" Canvas.Top="130">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="ValueChanged">
-                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </toolkit:DoubleUpDown>
 
-
-
-        <PasswordBox 
-                            Width="100"
-                            Name="password"
-                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
-                            materialDesign:TextFieldAssist.UnderlineBrush="#64b5f6"
-                            materialDesign:HintAssist.Hint="Password"
-                            materialDesign:HintAssist.Foreground="#64b5f6"
-                            materialDesign:TextFieldAssist.HasClearButton="True" Canvas.Left="895" Canvas.Top="110">
-            <i:Interaction.Triggers>
-                <i:EventTrigger EventName="PasswordChanged">
-                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}" />
-                </i:EventTrigger>
-            </i:Interaction.Triggers>
-        </PasswordBox>
     </Canvas>
 </Page>

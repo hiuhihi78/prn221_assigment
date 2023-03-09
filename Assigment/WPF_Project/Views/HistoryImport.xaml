@@ -31,7 +31,7 @@
             MaxLength="40"
             Style="{StaticResource MaterialDesignFilledTextBox}"
             TextWrapping="Wrap" Canvas.Left="111" Canvas.Top="67" HorizontalAlignment="Left" VerticalAlignment="Center" Width="395" RenderTransformOrigin="0.501,0.559"
-            Text="{Binding SearchOrderInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+            Text="{Binding SearchImportInfo, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             />
 
         <DatePicker

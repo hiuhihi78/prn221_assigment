@@ -67,8 +67,8 @@
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Customer name" Binding="{Binding CustomerName}" Width="180"/>
-                <DataGridTextColumn Header="Customer Address" Binding="{Binding CustomerAddress}" Width="180" />
                 <DataGridTextColumn Header="Customer Phone" Binding="{Binding CustomerPhone}" Width="150"/>
+                <DataGridTextColumn Header="Order date" Binding="{Binding OrderDate}" Width="180" />
                 <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}" Width="150"/>
                 <DataGridTextColumn Header="Staff order" Binding="{Binding Staff.Fullname}" Width="150"/>
                 <DataGridTemplateColumn Header="" Width="80">

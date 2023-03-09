@@ -43,7 +43,7 @@ namespace WPF_Project.Services
 
         public ObservableCollection<ProductDTO> GetListProductByName(string productName)
         {
-            var products = context.Products.Where(x => x.Name.Contains(productName)).ToList();
+            var products = context.Products.Include(x => x.Category).Where(x => x.Name.Contains(productName)).ToList();
             if (products == null) return new ObservableCollection<ProductDTO> { };
             return ProductDTO.FromListProductToObservableProductDTO(products);
         }

@@ -194,3 +194,5 @@ D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-w
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\HistoryImport.baml
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogImportDetail.g.cs
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogImportDetail.baml
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\ChooseProductImport.g.cs
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\ChooseProductImport.baml

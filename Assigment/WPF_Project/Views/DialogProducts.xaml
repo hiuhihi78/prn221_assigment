@@ -48,6 +48,7 @@
             Style="{StaticResource MaterialDesignIconButton}"
             ToolTip="Create new category" 
             Command="{Binding CreateNewCategory}"
+            IsEnabled="{Binding IsEnableItem}"
             Canvas.Left="442" Canvas.Top="137">
             <materialDesign:PackIcon Kind="Plus" />
         </Button>
@@ -112,6 +113,7 @@
             FontSize="40"
             ToolTip="Save"
             Command="{Binding SaveCommand}"
+            IsEnabled="{Binding IsEnableItem}"
             >
             <Button.Content>
                 <materialDesign:PackIcon 
@@ -128,7 +130,7 @@
             Background="#0077d0"
             FontSize="40" Click="Button_Click" 
             ToolTip="Back"
-            IsEnabled="{Binding IsEnableItem}"
+            
             >
             <Button.Content>
                 <materialDesign:PackIcon 
