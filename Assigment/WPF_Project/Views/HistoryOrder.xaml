@@ -52,30 +52,30 @@
             Style="{StaticResource MaterialDesignOutlinedDatePicker}" 
             Canvas.Left="274" Canvas.Top="129" HorizontalAlignment="Left" 
             SelectedDate="{Binding EndDate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-            DisplayDateEnd="{Binding CurrentDate}"
             />
 
         <DataGrid
             Name="gridProducts"
             CanUserAddRows="False"
-            ItemsSource="{Binding Orders}"
+            ItemsSource="{Binding Orders,Mode=TwoWay}"
             SelectionMode="Extended"
             SelectionUnit="Cell" 
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ScrollViewer.CanContentScroll="True" 
-            Height="301" Canvas.Left="118" Canvas.Top="230" HorizontalAlignment="Left" VerticalAlignment="Center" Width="882"
+            Height="301" Canvas.Left="109" Canvas.Top="238" HorizontalAlignment="Left" VerticalAlignment="Top" Width="907"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Customer name" Binding="{Binding CustomerName}" Width="180"/>
                 <DataGridTextColumn Header="Customer Address" Binding="{Binding CustomerAddress}" Width="180" />
                 <DataGridTextColumn Header="Customer Phone" Binding="{Binding CustomerPhone}" Width="150"/>
                 <DataGridTextColumn Header="Total Amount" Binding="{Binding TotalAmount}" Width="150"/>
+                <DataGridTextColumn Header="Staff order" Binding="{Binding Staff.Fullname}" Width="150"/>
                 <DataGridTemplateColumn Header="" Width="80">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
-                                Command="{Binding DataContext.AddToCart, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                Command="{Binding DataContext.ViewOrderDetail, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                 CommandParameter="{Binding}"
                                 ToolTip="View detail"
                                 >

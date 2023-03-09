@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -70,43 +71,86 @@ namespace WPF_Project.Services
             }
         }
 
-        public ObservableCollection<Models.Order> GetOrdersByCondition(string searchOrderInfo, DateTime? startDate, DateTime? endDate)
+        public ObservableCollection<OrderDTO> GetOrdersByCondition(string searchOrderInfo, DateTime? startDate, DateTime endDate)
         {
-            ObservableCollection<Models.Order> result = new ObservableCollection<Order>();
-            List<Order> orders = new List<Order>(); 
-            if(startDate == null)
+            ObservableCollection<OrderDTO> result = new ObservableCollection<OrderDTO>();
+
+            if (endDate == null)
+            {
+                return result;
+            }
+
+            List<Order> orders = new List<Order>();
+            var isAdmin = ((Staff)Navigation.NavigationParameters.Parameters["currentUser"]).Role == 1;
+            var currentUser = ((Staff)Navigation.NavigationParameters.Parameters["currentUser"]);
+
+           
+
+            if (startDate == null)
             {
                 orders = context.Orders
+                                .Include(x => x.Staff)
                                 .Where(p =>   
-                                       p.OrderDate <= endDate &&
-                                       (
-                                       p.CustomerAddress.Contains(searchOrderInfo)) ||
-                                       p.CustomerName.Contains(searchOrderInfo) ||
-                                       p.CustomerPhone.Contains(searchOrderInfo) ||
-                                       p.TotalAmount.ToString().Contains(searchOrderInfo)
+                                           (
+                                               p.OrderDate <= endDate.AddDays(1) 
+                                           ) &&
+                                           (
+                                               p.CustomerAddress.Contains(searchOrderInfo) ||
+                                               p.CustomerName.Contains(searchOrderInfo)    ||
+                                               p.CustomerPhone.Contains(searchOrderInfo)
+                                           ) &&
+                                           (
+                                                isAdmin == true ? true : p.StaffId == currentUser.Id
+                                           )
                                        )
                                 .ToList();
             }
             else
             {
                 orders = context.Orders
+                                .Include(x => x.Staff)
                                 .Where(p =>
-                                       (p.OrderDate >= startDate &&
-                                       p.OrderDate <= endDate) ||
-                                       p.CustomerAddress.Contains(searchOrderInfo) ||
-                                       p.CustomerName.Contains(searchOrderInfo) ||
-                                       p.CustomerPhone.Contains(searchOrderInfo) ||
-                                       p.TotalAmount.ToString().Contains(searchOrderInfo)
+                                           (
+                                               p.OrderDate <= endDate.AddDays(1) &&
+                                               p.OrderDate >= startDate
+                                           ) &&
+                                           (
+                                               p.CustomerAddress.Contains(searchOrderInfo) ||
+                                               p.CustomerName.Contains(searchOrderInfo) ||
+                                               p.CustomerPhone.Contains(searchOrderInfo)
+                                           ) &&
+                                           (
+                                                isAdmin == true ? true : p.StaffId == currentUser.Id
+                                           )
                                        )
                                 .ToList();
             }
              
             foreach (var item in orders)
             {
-                result.Add(item);
+                result.Add(OrderDTO.FromOrder(item));
             }
             return result;
 
+        }
+
+        public ObservableCollection<OrderDetail> GetOrderDetails(int orderId)
+        {
+            ObservableCollection<OrderDetail> result = new ObservableCollection<OrderDetail>();
+            var list = context.OrderDetails.Include(o => o.Product).Where(o => o.OrderId == orderId).ToList();  
+
+            foreach (var item in list) 
+            {
+                result.Add(item);
+            }
+
+            return result;
+        }
+
+        public string? GetStaffNameOrder(int id)
+        {
+            var staff = context.Staff.FirstOrDefault(x => x.Id == id);
+            return staff == null ? "" : staff.Fullname;
         }
     }
 }

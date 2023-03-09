@@ -6,6 +6,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using WPF_Project.Command;
+using WPF_Project.DTOs;
 using WPF_Project.Services;
 using WPF_Project.Views;
 
@@ -29,9 +31,9 @@ namespace WPF_Project.ViewModels
             set { startDate = value; OnPropertyChanged(); SearchOrder(); }
         }
 
-        private DateTime? endDate = DateTime.Now;
+        private DateTime endDate = DateTime.Now;
 
-        public DateTime? EndDate
+        public DateTime EndDate
         {
             get { return endDate; }
             set { endDate = value; OnPropertyChanged(); SearchOrder(); }
@@ -48,12 +50,12 @@ namespace WPF_Project.ViewModels
         }
 
 
-        private ObservableCollection<Models.Order> orders;
+        private ObservableCollection<OrderDTO> orders;
 
-        public ObservableCollection<Models.Order> Orders
+        public ObservableCollection<OrderDTO> Orders
         {
             get { return orders; }
-            set { orders = value; }
+            set { orders = value; OnPropertyChanged(); }
         }
 
         #endregion
@@ -61,9 +63,10 @@ namespace WPF_Project.ViewModels
         private OrderService orderService = new OrderService();
         public OrderHistoryViewModel()
         {
-            Orders = new ObservableCollection<Models.Order>();
+            Orders = new ObservableCollection<OrderDTO>();
             SearchOrderInfo = string.Empty;
             SearchOrder();
+            viewOrderDetail = new RelayCommand<OrderDTO>(ExecuteViewOrderDetail, o => true);
         }
 
         #region Search order
@@ -73,5 +76,23 @@ namespace WPF_Project.ViewModels
         }
         #endregion
 
+        #region View order details
+
+        private RelayCommand<OrderDTO> viewOrderDetail;
+
+        public RelayCommand<OrderDTO> ViewOrderDetail
+        {
+            get { return viewOrderDetail; }
+            set { viewOrderDetail = value; }
+        }
+        
+        private void ExecuteViewOrderDetail(OrderDTO order)
+        {
+            DialogOrderDetail dialogOrderDetail = new DialogOrderDetail();
+            dialogOrderDetail.DataContext = new DialogOrderDetailViewModel(dialogOrderDetail, this, order);
+            dialogOrderDetail.ShowDialog();
+        }
+
+        #endregion
     }
 }
