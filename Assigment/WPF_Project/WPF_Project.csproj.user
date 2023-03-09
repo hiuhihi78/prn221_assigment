@@ -16,6 +16,9 @@
     <Compile Update="Views\DialogCategorys.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\DialogImportDetail.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\DialogOrderDetail.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -26,6 +29,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\DialogSuppliers.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\HistoryImport.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\HistoryOrder.xaml.cs">
@@ -60,6 +66,9 @@
     <Page Update="Views\DialogCategorys.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\DialogImportDetail.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\DialogOrderDetail.xaml">
       <SubType>Designer</SubType>
     </Page>
@@ -70,6 +79,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\DialogSuppliers.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\HistoryImport.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\HistoryOrder.xaml">

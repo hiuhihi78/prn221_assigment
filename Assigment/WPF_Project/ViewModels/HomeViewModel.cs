@@ -38,6 +38,7 @@ namespace WPF_Project.ViewModels
             clickAccountManageCommand = new RelayCommand(HandleOpenAccountManageScreen);
             clickLogoutCommand = new RelayCommand(HandleLogout);
             clickHistoryOrderCommand = new RelayCommand(HandleOpenHistoryOrderScreen);
+            clickHistoryImportCommand = new RelayCommand(HandleOpenHistoryImportScreen);
         }
 
 
@@ -150,7 +151,23 @@ namespace WPF_Project.ViewModels
 
         #endregion
 
+        #region handle click tabItem Product management
 
-        
+        private RelayCommand clickHistoryImportCommand;
+
+        public RelayCommand ClickHistoryImportCommand
+        {
+            get { return clickHistoryImportCommand; }
+            set { clickHistoryImportCommand = value; OnPropertyChanged(); }
+        }
+
+        public void HandleOpenHistoryImportScreen()
+        {
+            NavigationFrameContentHomeScreen.NavigateTo(new Views.HistoryImport());
+        }
+
+        #endregion
+
+
     }
 }

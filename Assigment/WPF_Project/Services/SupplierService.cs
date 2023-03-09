@@ -60,5 +60,9 @@ namespace WPF_Project.Services
             return result;
         }
 
+        internal Supplier? GetSupplierById(int supplierId)
+        {
+            return context.Suppliers.FirstOrDefault(x => x.Id== supplierId);
+        }
     }
 }

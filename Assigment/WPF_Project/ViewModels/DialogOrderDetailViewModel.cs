@@ -55,11 +55,11 @@ namespace WPF_Project.ViewModels
 
             orderDTO = ((OrderDTO)order);
             staffOrder = orderService.GetStaffNameOrder(orderDTO.Id);
-            LoadOrderDetail();
+            LoadImportDetail();
         }
 
         #region Load order detail
-        public void LoadOrderDetail()
+        public void LoadImportDetail()
         {
             var orderId = ((OrderDTO)_order).Id;
             OrderDetails = orderService.GetOrderDetails(orderId);

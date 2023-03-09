@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -61,6 +62,85 @@ namespace WPF_Project.Services
                 transaction.Rollback();
                 return false;
             }
+        }
+
+        public ObservableCollection<ImportDTO> GetImportsByCondition(string searchImportInfo, DateTime? startDate, DateTime endDate)
+        {
+            ObservableCollection<ImportDTO> result = new ObservableCollection<ImportDTO>();
+
+            if (endDate == null)
+            {
+                return result;
+            }
+
+            List<Import> imports = new List<Import>();
+            var isAdmin = ((Staff)Navigation.NavigationParameters.Parameters["currentUser"]).Role == 1;
+            var currentUser = ((Staff)Navigation.NavigationParameters.Parameters["currentUser"]);
+
+
+
+            if (startDate == null)
+            {
+                imports = context.Imports
+                                .Include(x => x.Staff)
+                                .Include(x => x.Supplier)
+                                .Where(p =>
+                                           (
+                                               p.ImportDate <= endDate.AddDays(1)
+                                           ) &&
+                                           (
+                                              p.Supplier.Name.Contains(searchImportInfo) ||
+                                              p.Supplier.Phone.Contains(searchImportInfo) ||
+                                              p.Staff.Username.Contains(searchImportInfo) ||
+                                              p.Staff.Fullname.Contains(searchImportInfo)
+                                           ) &&
+                                           (
+                                                isAdmin == true ? true : p.StaffId == currentUser.Id
+                                           )
+                                       )
+                                .ToList();
+            }
+            else
+            {
+                imports = context.Imports
+                                .Include(x => x.Staff)
+                                .Include(x => x.Supplier)
+                                .Where(p =>
+                                           (
+                                               p.ImportDate <= endDate.AddDays(1) &&
+                                               p.ImportDate >= startDate
+                                           ) &&
+                                           (
+                                              p.Supplier.Name.Contains(searchImportInfo) ||
+                                              p.Supplier.Phone.Contains(searchImportInfo) ||
+                                              p.Staff.Username.Contains(searchImportInfo) ||
+                                              p.Staff.Fullname.Contains(searchImportInfo)
+                                           ) &&
+                                           (
+                                                isAdmin == true ? true : p.StaffId == currentUser.Id
+                                           )
+                                       )
+                                .ToList();
+            }
+
+            foreach (var item in imports)
+            {
+                result.Add(ImportDTO.FromImport(item));
+            }
+            return result;
+        }
+
+        internal ObservableCollection<ImportDetail> GetImportDetails(int importId)
+        {
+            ObservableCollection<ImportDetail> result = new ObservableCollection<ImportDetail>();
+            var list = context.ImportDetails.Include(o => o.Product).Where(o => o.ImportId == importId).ToList();
+
+            foreach (var item in list)
+            {
+                result.Add(item);
+            }
+
+            return result;
         }
     }
 }

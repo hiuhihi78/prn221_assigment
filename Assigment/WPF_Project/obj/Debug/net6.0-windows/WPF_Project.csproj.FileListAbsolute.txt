@@ -190,3 +190,7 @@ D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-w
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\HistoryOrder.baml
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogOrderDetail.g.cs
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogOrderDetail.baml
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\HistoryImport.g.cs
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\HistoryImport.baml
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogImportDetail.g.cs
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogImportDetail.baml
