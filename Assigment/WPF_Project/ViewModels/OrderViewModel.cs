@@ -178,12 +178,21 @@ namespace WPF_Project.ViewModels
             bool productExsited = listOrderProduct.FirstOrDefault(x => x.Id == productSelected.Id) != null;
             if (productExsited)
             {
-                for (int i = 0; i < listOrderProduct.Count(); i++)
+                var productInfo = productService.GetProductById(productSelected.Id);
+                var productSelectedInfo = listOrderProduct.FirstOrDefault(x => x.Id == productSelected.Id);
+                if (productInfo.Quantity > productSelectedInfo.Quantity) 
                 {
-                    if (listOrderProduct[i].Id == productSelected.Id)
+                    for (int i = 0; i < listOrderProduct.Count(); i++)
                     {
-                        listOrderProduct[i].Quantity = listOrderProduct[i].Quantity + 1;
+                        if (listOrderProduct[i].Id == productSelected.Id)
+                        {
+                            listOrderProduct[i].Quantity = listOrderProduct[i].Quantity + 1;
+                        }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("You was order all this product!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             else
@@ -195,7 +204,7 @@ namespace WPF_Project.ViewModels
                 }
                 else if (product.Quantity == 0)
                 {
-
+                    MessageBox.Show("This Product was sold out!", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
                 else
                 {

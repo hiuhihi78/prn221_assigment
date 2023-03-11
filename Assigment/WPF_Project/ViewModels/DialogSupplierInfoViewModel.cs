@@ -37,6 +37,8 @@ namespace WPF_Project.ViewModels
         private object _viewModelParentScreen;
         private SupplierDTO _supplier;
         public bool CanEdit { get; set; }
+        public bool CanCreate { get; set; }
+
         private string initialPhone;
 
         private SupplierService supplierService = new SupplierService();
@@ -46,6 +48,7 @@ namespace WPF_Project.ViewModels
             _viewModelParentScreen = viewModelParentScreen;
             _supplier = supplier;
             CanEdit = canEdit;
+            CanCreate = supplier == null;
 
             initialPhone = supplier == null ? "" : supplier.Phone;
             Supplier = supplier == null ? new SupplierDTO() { Address = "", Phone = "", Name = "" } : supplier;

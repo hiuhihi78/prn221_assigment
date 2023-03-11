@@ -103,6 +103,7 @@ namespace WPF_Project.Services
                                                 isAdmin == true ? true : p.StaffId == currentUser.Id
                                            )
                                        )
+                                .OrderByDescending(x => x.OrderDate)
                                 .ToList();
             }
             else
@@ -123,6 +124,7 @@ namespace WPF_Project.Services
                                                 isAdmin == true ? true : p.StaffId == currentUser.Id
                                            )
                                        )
+                                .OrderByDescending(x => x.OrderDate)    
                                 .ToList();
             }
              

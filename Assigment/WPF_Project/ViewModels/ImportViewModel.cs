@@ -41,7 +41,7 @@ namespace WPF_Project.ViewModels
         public string SearchProductName
         {
             get { return searchProductName; }
-            set { searchProductName = value; }
+            set { searchProductName = value; OnPropertyChanged(); }
         }
 
         private bool enableButtonCheckout;

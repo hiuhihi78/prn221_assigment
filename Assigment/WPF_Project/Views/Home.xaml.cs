@@ -33,7 +33,7 @@ namespace WPF_Project.Views
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
             var tabAccount = (TabItem)this.FindName("AccoutManageTab");
-            var tabSupplier = (TabItem)this.FindName("AccoutManageTab");
+            var tabSupplier = (TabItem)this.FindName("SupplierManageTab");
             var currentUserIsAdmin = ((Staff)Navigation.NavigationParameters.Parameters["currentUser"]).Role == 1;
             if(currentUserIsAdmin) 
             {

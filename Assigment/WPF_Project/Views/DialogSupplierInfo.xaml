@@ -37,7 +37,7 @@
             Style="{StaticResource MaterialDesignFilledTextBox}"
             TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="170" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
             Text="{Binding Supplier.Phone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-            IsEnabled="{Binding CanEdit}"
+            IsEnabled="{Binding CanCreate}"
             MaxLength="10"
             PreviewTextInput="TextBox_PreviewTextInput"
             />

@@ -65,7 +65,7 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ScrollViewer.CanContentScroll="True" 
-            Height="298" Canvas.Left="108" Canvas.Top="290" HorizontalAlignment="Center" VerticalAlignment="Top" Width="884"
+            Height="298" Canvas.Left="108" Canvas.Top="290" HorizontalAlignment="Left" VerticalAlignment="Center" Width="916"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn   Width="30"/>

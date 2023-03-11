@@ -32,7 +32,7 @@
             materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
             MaxLength="40"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            TextWrapping="Wrap" Canvas.Left="45" Canvas.Top="110" HorizontalAlignment="Left" VerticalAlignment="Top" Width="395" RenderTransformOrigin="0.501,0.559"
+            TextWrapping="Wrap" Canvas.Left="97" Canvas.Top="125" HorizontalAlignment="Left" VerticalAlignment="Top" Width="395" RenderTransformOrigin="0.501,0.559"
             Text="{Binding SearchSupplier ,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
             />
 
@@ -42,7 +42,7 @@
             materialDesign:ButtonProgressAssist.Value="-1"
             Content="New supplier"
             Style="{StaticResource MaterialDesignRaisedButton}"
-            Canvas.Left="45" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Top" 
+            Canvas.Left="97" Canvas.Top="210" HorizontalAlignment="Left" VerticalAlignment="Top" 
             Background="#00cc95"
             Command="{Binding CreateNewSupplier}"
             />
@@ -56,13 +56,13 @@
             AutoGenerateColumns="False"
             IsReadOnly="True"
             ScrollViewer.CanContentScroll="True" 
-            Height="298" Canvas.Left="45" Canvas.Top="270" HorizontalAlignment="Left" VerticalAlignment="Top" Width="1010"
+            Height="298" Canvas.Left="97" Canvas.Top="274" HorizontalAlignment="Left" VerticalAlignment="Top" Width="906"
             >
             <DataGrid.Columns>
                 <DataGridTextColumn   Width="30"/>
                 <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="300"/>
                 <DataGridTextColumn Header="Phone" Binding="{Binding Phone}" Width="200" />
-                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="300" />
+                <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="200" />
 
 
                 <DataGridTemplateColumn Header="" Width="80">
