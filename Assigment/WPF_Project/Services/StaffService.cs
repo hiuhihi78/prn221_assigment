@@ -132,5 +132,11 @@ namespace WPF_Project.Services
             }
         }
 
+        public bool CheckStaffIsEnable(StaffDTO staff)
+        {
+            var user = GetUser(staff);
+            return  context.Staff.FirstOrDefault(x => x.Username == user.Username && x.Password == user.Password && user.Status == true)!=null;
+        }
+
     }
 }

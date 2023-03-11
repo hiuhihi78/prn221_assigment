@@ -40,7 +40,7 @@
             materialDesign:ButtonProgressAssist.IsIndeterminate="True"
             materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
             materialDesign:ButtonProgressAssist.Value="-1"
-            Content="Create new product"
+            Content="New supplier"
             Style="{StaticResource MaterialDesignRaisedButton}"
             Canvas.Left="45" Canvas.Top="204" HorizontalAlignment="Left" VerticalAlignment="Top" 
             Background="#00cc95"

@@ -56,7 +56,26 @@ namespace WPF_Project.ViewModels
             staffService = new StaffService();
             loginCommand = new RelayCommand(Login);
             isOpenPopupRegister = false;
+            passwordChangedCommand = new RelayCommand<object>(ExecutePasswordChangedCommand);
         }
+
+
+        #region Password change command
+        private RelayCommand<object> passwordChangedCommand;
+
+        public RelayCommand<object> PasswordChangedCommand
+        {
+            get { return passwordChangedCommand; }
+            set { passwordChangedCommand = value; }
+        }
+
+        private void ExecutePasswordChangedCommand(object pass)
+        {
+            PasswordBox passwordBox = (PasswordBox)pass;
+            Staff.Password = passwordBox.Password;
+        }
+
+        #endregion
 
 
         #region Login
@@ -73,15 +92,25 @@ namespace WPF_Project.ViewModels
         {
             try
             {
+                
                 var user = staffService.GetUser(Staff);
                 if (user != null)
                 {
-                    NavigationParameters.Parameters.Add("currentUser", user);
-                    NavigationService.NavigateTo(new Home());
+                    var canLogin = staffService.CheckStaffIsEnable(Staff);
+                    if(canLogin) 
+                    {
+                        NavigationParameters.Parameters.Add("currentUser", user);
+                        NavigationService.NavigateTo(new Home());
+                    }
+                    else
+                    {
+                        Message = "Account was blocked! Please contact with adminatrator!";
+                    }
+                    
                 }
                 else
                 {
-                    Message = "Login fail!";
+                    Message = "Username or password wrong!";
                 }
             }
             catch (Exception ex)

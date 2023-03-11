@@ -7,8 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="550" d:DesignWidth="800"
              
-             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-            >
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      Title="Login">
 
     <Page.Resources>
         <Style x:Key="linkStyle" TargetType="Button">
@@ -20,110 +21,93 @@
         </Style>
     </Page.Resources>
 
-    <StackPanel Width="300"
-                Orientation="Vertical"
-                Margin="0,35,0,0"
-                >
-        <Image Source="D:\FU\PRN221\Assigment\Assigment\WPF_Project\Images\Logo.png"
-               Width="100"
-               Height="100"
-               />
-
-        <TextBlock Text="CuToi Shop"
-                   Foreground="White"
-                   FontSize="25"
-                   FontWeight="Medium"
-                   FontFamily="Monsterrat"
-                   HorizontalAlignment="Center"
-                />
-
-        <TextBox
-            x:Name="tbUsername"
-            materialDesign:HintAssist.Hint="Name"
-            Text="{Binding Path=Staff.Username, Mode=TwoWay}"
-            Background="#e6e8e4"
-            Height="30"
-            Margin="0,20,0,0"
-            Padding="3,0,3,0"
-            FontSize="15"
-            >
-        </TextBox>
-
-        <TextBox
-            x:Name="tbPassword"
-            materialDesign:HintAssist.Hint="Password"
-            materialDesign:TextFieldAssist.HasClearButton="True"          
-            Text="{Binding Path=Staff.Password, Mode=TwoWay}"
-            Background="#e6e8e4"
-            Height="30"
-            Margin="0,20,0,0"
-            Padding="3,0,3,0"
-            FontSize="15"
-            >
-        </TextBox>
-
-
-        <TextBlock 
-            Name="tbMessage"
-            Margin="0,5,0,3"
-            Foreground="Red"
-            FontStyle="Italic"
-            Text="{Binding Message}"
-            FontWeight="Bold"
-            Visibility="Visible"
-            />
-
-        <Canvas>
-            <Button
-                Name="btnLogin"
-                Width="180"
-                Background="#37b71d"
-                Content="Login"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Style="{StaticResource MaterialDesignRaisedLightButton}"
-                ToolTip="Resource name: MaterialDesignRaisedLightButton" HorizontalAlignment="Left" Canvas.Left="60" Canvas.Top="0" VerticalAlignment="Center" 
-                Command="{Binding LoginCommand}" RenderTransformOrigin="0.725,0.625"
-                />
-
-            <TextBlock
-                Name="tbForgotPassword"
-                Canvas.Left="16" Canvas.Top="45" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Cursor="Hand">
-                <Hyperlink Command="" TextDecorations="Underline" Foreground="Blue">
-                    Forgotten password?
-                </Hyperlink>
-            </TextBlock>
-
-            <TextBlock 
-                Name="tbRigster"
-                Canvas.Left="215" Canvas.Top="45" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Cursor="Hand">
-                <Hyperlink Command="{Binding ChangeStatusPopUpRegister}" TextDecorations="Underline" Foreground="Blue">
-                    Rigister
-                </Hyperlink>
-            </TextBlock>
-        </Canvas>
-
-
-
-        <Canvas>
-            <TextBox
-                VerticalAlignment="Top"
-                materialDesign:HintAssist.Hint="User name"
-                materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox, Converter={StaticResource BooleanToVisibilityConverter}}"
-                MaxLength="20"
-                Style="{StaticResource MaterialDesignFilledTextBox}"
-                Width="200"
-                Background="White"
-                Foreground="Black"
-                />
-            <Button Content="Close" Command="{Binding ChangeStatusPopUpRegister}" HorizontalAlignment="Center" Canvas.Top="65" VerticalAlignment="Top"/>
-        </Canvas>
-    </StackPanel>
+    <Grid>
+        <materialDesign:Card Padding="10" HorizontalAlignment="Center" VerticalAlignment="Center"
+                             Width="400" Height="300">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Foreground="#64b5f6" FontWeight="DemiBold" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Text="Login"/>
+                <Grid Grid.Row="1">
+                    <Grid.Resources>
+                        <Style x:Key="grid" TargetType="Grid">
+                            <Setter Property="Margin" Value="0 10 0 10"/>
+                        </Style>
+                        <Style TargetType="materialDesign:PackIcon">
+                            <Setter Property="Margin" Value="0 0 5 0"/>
+                        </Style>
+                    </Grid.Resources>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="1" Margin="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="80*"/>
+                            <ColumnDefinition Width="18*"/>
+                            <ColumnDefinition Width="161*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Grid.Column="0" VerticalAlignment="Bottom" Kind="Account" />
+                        <TextBox
+                            Text="{Binding Staff.Username, Mode=TwoWay}"
+                            Grid.Column="1"
+                            Name="Email"
+                            Style="{StaticResource MaterialDesignFloatingHintTextBox}"
+                            materialDesign:TextFieldAssist.UnderlineBrush="#64b5f6"
+                            materialDesign:HintAssist.Hint="Email"
+                            materialDesign:HintAssist.Foreground="#64b5f6" Grid.ColumnSpan="3"
+                            />
+                    </Grid>
+                    <Grid Grid.Row="2" Style="{StaticResource grid}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <materialDesign:PackIcon Grid.Column="0"  VerticalAlignment="Bottom" Kind="Lock" />
+                        <PasswordBox 
+                            Grid.Column="1"
+                            Name="password"
+                            Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
+                            materialDesign:TextFieldAssist.UnderlineBrush="#64b5f6"
+                            materialDesign:HintAssist.Hint="Password"
+                            materialDesign:HintAssist.Foreground="#64b5f6"
+                            materialDesign:TextFieldAssist.HasClearButton="True">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="PasswordChanged">
+                                    <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" CommandParameter="{Binding ElementName=password}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </PasswordBox>
+                    </Grid >
+                   
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <TextBlock 
+                            Text="{Binding Message}" 
+                            Foreground="Red"
+                            Canvas.Left="0" Canvas.Top="95"
+                            />
+                    <Button 
+                            Command="{Binding LoginCommand}"
+                            Name="loginBtn"
+                            Width="100"
+                            Content="Login"
+                            Style="{StaticResource MaterialDesignRaisedLightButton}"
+                            ToolTip="Login" Canvas.Left="123" Canvas.Top="168" />
+                </Grid>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
 
 
 </Page>

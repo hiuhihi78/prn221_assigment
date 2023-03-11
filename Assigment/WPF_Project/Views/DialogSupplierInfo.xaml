@@ -12,7 +12,7 @@
         FontSize="15"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
-        Background="WhiteSmoke" Width="489" Height="499"
+        Background="WhiteSmoke" Width="489" Height="455"
         >
     <Canvas>
         <TextBlock
@@ -26,7 +26,7 @@
             materialDesign:TextFieldAssist.CharacterCounterVisibility="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextBoxTextCountComboBox}"
             MaxLength="30"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="123" HorizontalAlignment="Center" Width="330" VerticalAlignment="Top" 
+            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="94" HorizontalAlignment="Center" Width="330" VerticalAlignment="Top" 
             Text="{Binding Supplier.Name,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
             IsEnabled="{Binding CanEdit}"
             />
@@ -35,7 +35,7 @@
             materialDesign:HintAssist.Hint="Supplier Phone"
             AcceptsReturn="True"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="202" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
+            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="170" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
             Text="{Binding Supplier.Phone, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
             IsEnabled="{Binding CanEdit}"
             MaxLength="10"
@@ -45,14 +45,14 @@
             materialDesign:HintAssist.Hint="Supplier Address"
             AcceptsReturn="True"
             Style="{StaticResource MaterialDesignFilledTextBox}"
-            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="285" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
+            TextWrapping="Wrap" Canvas.Left="69" Canvas.Top="248" HorizontalAlignment="Center" VerticalAlignment="Top" Width="330" 
             Text="{Binding Supplier.Address, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
             IsEnabled="{Binding CanEdit}"
             />
 
         <Button
-            Canvas.Left="162" Canvas.Top="391" 
-            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Canvas.Left="162" Canvas.Top="350" 
+            HorizontalAlignment="Center" VerticalAlignment="Top" 
             Width="106" Height="68"
             Background="#49be25"
             FontSize="40"
@@ -78,8 +78,8 @@
         </Button>
 
         <Button
-            Canvas.Left="292" Canvas.Top="391" 
-            HorizontalAlignment="Left" VerticalAlignment="Center" 
+            Canvas.Left="292" Canvas.Top="354" 
+            HorizontalAlignment="Center" VerticalAlignment="Top" 
             Width="107" Height="68"
             Background="#0077d0"
             FontSize="40" Click="Button_Click" 
