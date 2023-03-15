@@ -94,8 +94,18 @@ namespace WPF_Project.DTOs
                 staffId = order.StaffId,
                 staff= order.Staff,
                 totalAmount = order.TotalAmount,
+                canCancel = DateTime.Now.Date.Subtract(order.OrderDate.Date).Days < 1,
             };
         }
+
+        private bool? canCancel;
+
+        public bool? CanCancel
+        {
+            get { return canCancel; }
+            set { canCancel = value; NotifyPropertyChanged(); }
+        }
+
 
     }
 }
