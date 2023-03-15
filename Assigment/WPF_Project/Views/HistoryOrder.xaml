@@ -92,9 +92,9 @@
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Button
-                                    Command="{Binding DataContext.ViewOrderDetail, RelativeSource={RelativeSource AncestorType=DataGrid}}"
+                                    Command="{Binding DataContext.CancelOrder, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     CommandParameter="{Binding}"
-                                    ToolTip="View detail"
+                                    ToolTip="Cancel order"
                                     Background="Red"
                                     Content="Cancel"
                                     >

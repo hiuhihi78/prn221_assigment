@@ -144,5 +144,12 @@ namespace WPF_Project.Services
 
             return result;
         }
+
+        public void RemoveImport(int id)
+        {
+            context.ImportDetails.RemoveRange(context.ImportDetails.Where(x => x.ImportId == id).ToList());
+            context.Imports.Remove(context.Imports.FirstOrDefault(x => x.Id == id));
+            context.SaveChanges();
+        }
     }
 }

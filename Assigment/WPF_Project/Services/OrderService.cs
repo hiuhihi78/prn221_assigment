@@ -154,5 +154,13 @@ namespace WPF_Project.Services
             var staff = context.Staff.FirstOrDefault(x => x.Id == id);
             return staff == null ? "" : staff.Fullname;
         }
+
+        public void RemoveOrder(int id)
+        {
+            context.OrderDetails
+                .RemoveRange(context.OrderDetails.Where(x => x.OrderId == id).ToList());
+            context.Orders.Remove(context.Orders.FirstOrDefault(x => x.Id == id));
+            context.SaveChanges();  
+        }
     }
 }

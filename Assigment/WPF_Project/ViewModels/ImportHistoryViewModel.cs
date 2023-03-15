@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPF_Project.Command;
 using WPF_Project.DTOs;
 using WPF_Project.Services;
@@ -67,6 +68,7 @@ namespace WPF_Project.ViewModels
             searchImportInfo = string.Empty;
             SearchImport();
             viewImportDetail = new RelayCommand<ImportDTO>(ExecuteViewImportDetail, o => true);
+            cancelImport = new RelayCommand<ImportDTO>(ExecuteCancelImport, o => true);
         }
 
         #region Search order
@@ -91,6 +93,28 @@ namespace WPF_Project.ViewModels
             DialogImportDetail dialogImportDetail = new DialogImportDetail();
             dialogImportDetail.DataContext = new DialogImportViewModel(dialogImportDetail, this, import);
             dialogImportDetail.ShowDialog();    
+        }
+
+        #endregion
+
+        #region Cancel import
+        private RelayCommand<ImportDTO> cancelImport;
+
+        public RelayCommand<ImportDTO> CancelImport
+        {
+            get { return cancelImport; }
+            set { cancelImport = value; }
+        }
+
+        private void ExecuteCancelImport(ImportDTO import)
+        {
+            MessageBoxResult comfrim = MessageBox.Show("Are you sure to cancel this import?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (comfrim == MessageBoxResult.Yes)
+            {
+                importService.RemoveImport(import.Id);
+                MessageBox.Show("Success!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                SearchImport();
+            }
         }
 
         #endregion

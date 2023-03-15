@@ -6,6 +6,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using WPF_Project.Command;
 using WPF_Project.DTOs;
 using WPF_Project.Services;
@@ -67,6 +68,7 @@ namespace WPF_Project.ViewModels
             SearchOrderInfo = string.Empty;
             SearchOrder();
             viewOrderDetail = new RelayCommand<OrderDTO>(ExecuteViewOrderDetail, o => true);
+            cancelOrder = new RelayCommand<OrderDTO>(ExecuteCancelOrder, o => true);
         }
 
         #region Search order
@@ -91,6 +93,28 @@ namespace WPF_Project.ViewModels
             DialogOrderDetail dialogOrderDetail = new DialogOrderDetail();
             dialogOrderDetail.DataContext = new DialogOrderDetailViewModel(dialogOrderDetail, this, order);
             dialogOrderDetail.ShowDialog();
+        }
+
+        #endregion
+
+        #region Cancel order
+        private RelayCommand<OrderDTO> cancelOrder;
+
+        public RelayCommand<OrderDTO> CancelOrder
+        {
+            get { return cancelOrder; }
+            set { cancelOrder = value; }
+        }
+
+        private void ExecuteCancelOrder(OrderDTO order)
+        {
+            MessageBoxResult comfrim = MessageBox.Show("Are you sure to cancel this order?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if(comfrim == MessageBoxResult.Yes) 
+            {
+                orderService.RemoveOrder(order.Id);
+                MessageBox.Show("Success!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                SearchOrder();
+            }
         }
 
         #endregion

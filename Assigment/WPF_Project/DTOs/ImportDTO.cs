@@ -77,8 +77,16 @@ namespace WPF_Project.DTOs
                 staffId = import.StaffId,
                 supplier = import.Supplier,
                 totalAmount = import.TotalAmount,
-
+                canCancel = DateTime.Now.Date.Subtract(import.ImportDate.Date).Days < 1,
             };
+        }
+
+        private bool? canCancel;
+
+        public bool? CanCancel
+        {
+            get { return canCancel; }
+            set { canCancel = value; NotifyPropertyChanged(); }
         }
     }
 }
