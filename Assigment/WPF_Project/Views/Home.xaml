@@ -28,7 +28,7 @@
                 >
 
                 <materialDesign:NavigationRailAssist.FloatingContent>
-                    <Image Source="D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\Images\Logo.png"
+                    <Image Source="\Images\Logo.png"
                        Width="70"
                        Height="70"
                     />

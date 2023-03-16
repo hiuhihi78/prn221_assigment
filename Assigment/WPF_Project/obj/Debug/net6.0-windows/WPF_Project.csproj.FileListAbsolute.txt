@@ -200,3 +200,6 @@ D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-w
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\SupplierManagement.baml
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogSupplierInfo.g.cs
 D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\Views\DialogSupplierInfo.baml
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-windows\Images\Logo.png
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\bin\Debug\net6.0-windows\Images\garlic.ico
+D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\WPF_Project_Content.g.cs

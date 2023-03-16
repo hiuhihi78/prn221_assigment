@@ -8,7 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\garlic.ico" />
+    <None Remove="Images\Logo.png" />
     <None Remove="ViewModels\LoginViewModel.cs~RFb6f7c57.TMP" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\garlic.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\Logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
@@ -20,10 +31,6 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.2" />
     <PackageReference Include="System.Windows.Interactivity.WPF" Version="2.0.20525" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>
