@@ -147,9 +147,24 @@ namespace WPF_Project.Services
 
         public void RemoveImport(int id)
         {
-            context.ImportDetails.RemoveRange(context.ImportDetails.Where(x => x.ImportId == id).ToList());
-            context.Imports.Remove(context.Imports.FirstOrDefault(x => x.Id == id));
-            context.SaveChanges();
+            var importDetails = context.ImportDetails.Where(x => x.ImportId == id).ToList();
+            foreach (var item in importDetails)
+            {
+                var product = context.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                if(product != null)
+                {
+                    product.Quantity = product.Quantity - item.Quantity;
+                }
+                context.Remove(item);
+                context.SaveChanges();
+            }
+
+            var import = context.Imports.FirstOrDefault(x => x.Id == id);
+            if(import != null)
+            {
+                context.Remove(import);
+                context.SaveChanges();
+            }
         }
     }
 }

@@ -157,10 +157,24 @@ namespace WPF_Project.Services
 
         public void RemoveOrder(int id)
         {
-            context.OrderDetails
-                .RemoveRange(context.OrderDetails.Where(x => x.OrderId == id).ToList());
-            context.Orders.Remove(context.Orders.FirstOrDefault(x => x.Id == id));
-            context.SaveChanges();  
+            var orderDetails = context.OrderDetails.Where(x => x.OrderId == id).ToList();
+            foreach (var item in orderDetails) 
+            {
+                var product = context.Products.FirstOrDefault(x => x.Id == item.ProductId);
+                if(product != null)
+                {
+                    product.Quantity = product.Quantity + item.Quantity;
+
+                    context.OrderDetails.Remove(item);  
+                    context.SaveChanges();  
+                }
+            }
+            var order = context.Orders.FirstOrDefault(x => x.Id == id);
+            if (order != null)
+            {
+                context.Orders.Remove(order);
+                context.SaveChanges();
+            }
         }
     }
 }
