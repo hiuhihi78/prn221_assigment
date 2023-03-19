@@ -13,11 +13,12 @@
       FontSize="15"
       
       xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
-      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
+      xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" 
+      xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels"
         
        >
     <Page.DataContext>
-        <viewmodels:ImportHistoryViewModel/>
+        <viewmodels:ImportHistoryViewModel></viewmodels:ImportHistoryViewModel>
     </Page.DataContext>
     <Canvas>
         <TextBlock

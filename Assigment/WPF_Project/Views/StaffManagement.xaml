@@ -13,6 +13,7 @@
       xmlns:converter="clr-namespace:WPF_Project.Converter"
       xmlns:toolkit="http://schemas.xceed.com/wpf/xaml/toolkit"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:viewmodels="clr-namespace:WPF_Project.ViewModels">
+
     <Page.DataContext>
         <viewmodels:StaffManagementViewModel/>
     </Page.DataContext>
@@ -58,7 +59,6 @@
             Background="#00cc95"
             Command="{Binding CreateNewStaff}"
             />
-
         <DataGrid
             Name="gridProducts"
             CanUserAddRows="False"
@@ -79,7 +79,7 @@
                 <DataGridTextColumn Header="Address" Binding="{Binding Address}" Width="150"/>
                 <DataGridTextColumn Header="Role" Binding="{Binding RoleNavigation.Name}" Width="100"/>
 
-                <DataGridTemplateColumn Header="Status" Width="150">
+                <DataGridTemplateColumn Header="Status" Width="112">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -87,32 +87,90 @@
                                     Command="{Binding DataContext.ChangeStaffStatus, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     CommandParameter="{Binding}"
                                     >
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                                            <Border
+                                                x:Name="border"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Cursor="{TemplateBinding Cursor}"
+                                                SnapsToDevicePixels="True">
+                                                <ContentPresenter
+                                                    x:Name="contentPresenter"
+                                                    Margin="{TemplateBinding Padding}"
+                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                    Content="{TemplateBinding Content}"
+                                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                    Focusable="False"
+                                                    RecognizesAccessKey="True"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="LightGreen" />
+                                                    <Setter TargetName="border" Property="BorderThickness" Value="1" />
+                                                    <Setter TargetName="border" Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
                                     <Button.Resources>
                                         <Style TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding Status}" Value="true">
                                                     <Setter Property="Visibility" Value="Visible"/>
-                                                    <Setter Property="Background" Value="Green"/>
+                                                    <Setter Property="Background" Value="#FF4AD10A"/>
                                                     <Setter Property="Width" Value="80"/>
                                                     <Setter Property="Height" Value="35"/>
                                                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
                                                     <Setter Property="VerticalContentAlignment" Value="Center"/>
                                                     <Setter Property="BorderThickness" Value="1"/>
                                                 </DataTrigger>
-                                                
                                             </Style.Triggers>
                                         </Style>
                                     </Button.Resources>
                                     <Button.Content>
-                                        <TextBlock>Activate</TextBlock>
+                                        <TextBlock>Active</TextBlock>
                                     </Button.Content>
                                 </Button>
                                 <Button
                                     Command="{Binding DataContext.ChangeStaffStatus, RelativeSource={RelativeSource AncestorType=DataGrid}}"
                                     CommandParameter="{Binding}"
                                     >
-                                    
+                                    <Button.Template>
+                                        <ControlTemplate TargetType="{x:Type ButtonBase}">
+                                            <Border
+                                                x:Name="border"
+                                                Background="{TemplateBinding Background}"
+                                                BorderBrush="{TemplateBinding BorderBrush}"
+                                                BorderThickness="{TemplateBinding BorderThickness}"
+                                                Cursor="{TemplateBinding Cursor}"
+                                                SnapsToDevicePixels="True">
+                                                <ContentPresenter
+                                                    x:Name="contentPresenter"
+                                                    Margin="{TemplateBinding Padding}"
+                                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                    Content="{TemplateBinding Content}"
+                                                    ContentStringFormat="{TemplateBinding ContentStringFormat}"
+                                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                    Focusable="False"
+                                                    RecognizesAccessKey="True"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter TargetName="border" Property="Background" Value="#FFFF6464" />
+                                                    <Setter TargetName="border" Property="BorderThickness" Value="1" />
+                                                    <Setter TargetName="border" Property="Cursor" Value="Hand"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Button.Template>
                                     <Button.Resources>
                                         <Style TargetType="Button">
                                             <Setter Property="Visibility" Value="Collapsed"/>
@@ -127,11 +185,10 @@
                                                     <Setter Property="BorderThickness" Value="1"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
-                                            
                                         </Style>
                                     </Button.Resources>
                                     <Button.Content>
-                                        <TextBlock>DeActivate</TextBlock>
+                                        <TextBlock>Inactive</TextBlock>
                                     </Button.Content>
                                 </Button>
                             </StackPanel>

@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\obj\Debug\net6.0-windows\
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\obj\Debug\net6.0-windows\
 WPF_Project
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-D:\FU\PRN221\Assigment\prn221_assigment\Assigment\WPF_Project\App.xaml
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\App.xaml
 20-544516267
 2248052010
 72-207064725
-232-830441507
+232-331438143
 MainWindow.xaml;Views\CheckoutImport.xaml;Views\CheckoutOrder.xaml;Views\ChooseProductImport.xaml;Views\DialogCategorys.xaml;Views\DialogImportDetail.xaml;Views\DialogOrderDetail.xaml;Views\DialogProducts.xaml;Views\DialogStaffs.xaml;Views\DialogSupplierInfo.xaml;Views\DialogSuppliers.xaml;Views\HistoryImport.xaml;Views\HistoryOrder.xaml;Views\Home.xaml;Views\Import.xaml;Views\Login.xaml;Views\Order.xaml;Views\ProductManagement.xaml;Views\StaffManagement.xaml;Views\SupplierManagement.xaml;
 
 False
