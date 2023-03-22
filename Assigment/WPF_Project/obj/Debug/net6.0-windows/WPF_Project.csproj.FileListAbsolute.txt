@@ -333,3 +333,10 @@ E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\obj\Debug\net6.0-windows\refint\WP
 E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\obj\Debug\net6.0-windows\WPF_Project.pdb
 E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\obj\Debug\net6.0-windows\WPF_Project.genruntimeconfig.cache
 E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\obj\Debug\net6.0-windows\ref\WPF_Project.dll
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\bin\Debug\net6.0-windows\appsettings.json
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.dll
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.FileExtensions.dll
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\bin\Debug\net6.0-windows\Microsoft.Extensions.Configuration.Json.dll
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\bin\Debug\net6.0-windows\Microsoft.Extensions.FileProviders.Abstractions.dll
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\bin\Debug\net6.0-windows\Microsoft.Extensions.FileProviders.Physical.dll
+E:\S7\PRN221\ProjectApp\Assigment\WPF_Project\bin\Debug\net6.0-windows\Microsoft.Extensions.FileSystemGlobbing.dll
