@@ -54,7 +54,7 @@ namespace WPF_Project.ViewModels
             _order= order;
 
             orderDTO = ((OrderDTO)order);
-            staffOrder = orderService.GetStaffNameOrder(orderDTO.Id);
+            staffOrder = orderService.GetStaffNameOrder(orderDTO.StaffId);
             LoadImportDetail();
         }
 

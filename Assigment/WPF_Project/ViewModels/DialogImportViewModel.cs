@@ -66,7 +66,7 @@ namespace WPF_Project.ViewModels
 
             supplier = supplierService.GetSupplierById(import.SupplierId);
             importDTO = ((ImportDTO)import);
-            staffImport = orderService.GetStaffNameOrder(import.Id);
+            staffImport = orderService.GetStaffNameOrder(import.StaffId);
             LoadOrderDetail();
         }
 

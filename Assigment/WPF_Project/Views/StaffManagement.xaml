@@ -188,7 +188,7 @@
                                         </Style>
                                     </Button.Resources>
                                     <Button.Content>
-                                        <TextBlock>Inactive</TextBlock>
+                                        <TextBlock>Deactive</TextBlock>
                                     </Button.Content>
                                 </Button>
                             </StackPanel>
